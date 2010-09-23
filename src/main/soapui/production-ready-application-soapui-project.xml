@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="production-ready-application" resourceRoot="" soapui-version="3.6" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="customerServiceSOAP" type="wsdl" bindingName="{http://ws.xebia.fr/customer/v1_0}customerServiceSOAP" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/production-ready-application/services/v1.0/customerService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/production-ready-application/services/v1.0/customerService?wsdl"><con:part><con:url>http://localhost:8080/production-ready-application/services/v1.0/customerService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="customerService" targetNamespace="http://ws.xebia.fr/customer/v1_0" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ws.xebia.fr/customer/v1_0" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="http://ws.xebia.fr/customer/v1_0">
+      <xsd:element name="getCustomer">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="id" type="xsd:long"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getCustomerResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="customer" type="tns:Customer"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="Customer">
+        <xsd:annotation>
+          <xsd:documentation>customer</xsd:documentation>
+        </xsd:annotation>
+        <xsd:all>
+          <xsd:element name="id" type="xsd:long"/>
+          <xsd:element name="firstName" type="xsd:string"/>
+          <xsd:element name="lastName" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="gender" type="tns:Gender"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="birthdate" type="xsd:date"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:simpleType name="Gender">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="MALE"/>
+          <xsd:enumeration value="FEMALE"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="saveCustomer">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="customer" nillable="false" type="tns:Customer"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="saveCustomerResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="customer" nillable="false" type="tns:Customer"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CustomerNotFoundFault">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="message" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="zeNoisyOperation">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="id" type="xsd:long"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="zeNoisyOperationResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="out" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="zeSlowOperation">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="id" type="xsd:long"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="zeSlowOperationResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="out" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="zeVerySlowAggregatingOperation">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="id" type="xsd:long"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="zeVerySlowAggregatingOperationResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="out" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="zeJmsOperation">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="zeJmsOperationResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="out" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="zeBuggyOperation">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="id" type="xsd:long"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="zeBuggyOperationResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="out" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="zeVerySlowAggregatingOperationResponse">
+    <wsdl:part element="tns:zeVerySlowAggregatingOperationResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCustomerResponse">
+    <wsdl:part element="tns:getCustomerResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CustomerNotFoundException">
+    <wsdl:part element="tns:CustomerNotFoundFault" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="zeJmsOperationRequest">
+    <wsdl:part element="tns:zeJmsOperation" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="zeSlowOperationRequest">
+    <wsdl:part element="tns:zeSlowOperation" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveCustomerRequest">
+    <wsdl:part element="tns:saveCustomer" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="zeJmsOperationResponse">
+    <wsdl:part element="tns:zeJmsOperationResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="zeNoisyOperationRequest">
+    <wsdl:part element="tns:zeNoisyOperation" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="zeSlowOperationResponse">
+    <wsdl:part element="tns:zeSlowOperationResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="zeVerySlowAggregatingOperationRequest">
+    <wsdl:part element="tns:zeVerySlowAggregatingOperation" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="zeBuggyOperationRequest">
+    <wsdl:part element="tns:zeBuggyOperation" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="zeBuggyOperationResponse">
+    <wsdl:part element="tns:zeBuggyOperationResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveCustomerResponse">
+    <wsdl:part element="tns:saveCustomerResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCustomerRequest">
+    <wsdl:part element="tns:getCustomer" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="zeNoisyOperationResponse">
+    <wsdl:part element="tns:zeNoisyOperationResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="customerService">
+    <wsdl:operation name="getCustomer">
+      <wsdl:input message="tns:getCustomerRequest"></wsdl:input>
+      <wsdl:output message="tns:getCustomerResponse"></wsdl:output>
+      <wsdl:fault message="tns:CustomerNotFoundException" name="CustomerNotFoundException"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="saveCustomer">
+      <wsdl:input message="tns:saveCustomerRequest"></wsdl:input>
+      <wsdl:output message="tns:saveCustomerResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="zeNoisyOperation">
+      <wsdl:input message="tns:zeNoisyOperationRequest"></wsdl:input>
+      <wsdl:output message="tns:zeNoisyOperationResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="zeSlowOperation">
+      <wsdl:input message="tns:zeSlowOperationRequest"></wsdl:input>
+      <wsdl:output message="tns:zeSlowOperationResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="zeVerySlowAggregatingOperation">
+      <wsdl:input message="tns:zeVerySlowAggregatingOperationRequest"></wsdl:input>
+      <wsdl:output message="tns:zeVerySlowAggregatingOperationResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="zeJmsOperation">
+      <wsdl:input message="tns:zeJmsOperationRequest"></wsdl:input>
+      <wsdl:output message="tns:zeJmsOperationResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="zeBuggyOperation">
+      <wsdl:input message="tns:zeBuggyOperationRequest"></wsdl:input>
+      <wsdl:output message="tns:zeBuggyOperationResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="customerServiceSOAP" type="tns:customerService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getCustomer">
+      <soap:operation soapAction="http://ws.xebia.fr/customer/v1_0/getCustomer"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="CustomerNotFoundException">
+        <soap:fault name="CustomerNotFoundException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="saveCustomer">
+      <soap:operation soapAction="http://ws.xebia.fr/customer/v1_0/saveCustomer"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="zeNoisyOperation">
+      <soap:operation soapAction="http://ws.xebia.fr/customer/v1_0/zeNoisyOperation"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="zeSlowOperation">
+      <soap:operation soapAction="http://ws.xebia.fr/customer/v1_0/zeSlowOperation"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="zeVerySlowAggregatingOperation">
+      <soap:operation soapAction="http://ws.xebia.fr/customer/v1_0/zeVerySlowAggregatingOperation"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="zeJmsOperation">
+      <soap:operation soapAction="http://ws.xebia.fr/customer/v1_0/zeJmsOperation"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="zeBuggyOperation">
+      <soap:operation soapAction="http://ws.xebia.fr/customer/v1_0/zeBuggyOperation"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="customerService">
+    <wsdl:port binding="tns:customerServiceSOAP" name="customerServiceSOAP">
+      <soap:address location="http://localhost:8080/production-ready-application/services/v1.0/customerService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/production-ready-application/services/v1.0/customerService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://ws.xebia.fr/customer/v1_0/getCustomer" name="getCustomer" bindingOperationName="getCustomer" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="customer-2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/production-ready-application/services/v1.0/customerService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://ws.xebia.fr/customer/v1_0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v1:getCustomer>
+         <v1:id>2</v1:id>
+      </v1:getCustomer>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>admin</con:username><con:password>admin</con:password></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.xebia.fr/customer/v1_0/getCustomer"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://ws.xebia.fr/customer/v1_0/saveCustomer" name="saveCustomer" bindingOperationName="saveCustomer" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/production-ready-application/services/v1.0/customerService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://ws.xebia.fr/customer/v1_0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v1:saveCustomer>
+         <v1:customer>
+            <!--You may enter the following 3 items in any order-->
+            <v1:id>?</v1:id>
+            <v1:firstName>?</v1:firstName>
+            <v1:lastName>?</v1:lastName>
+         </v1:customer>
+      </v1:saveCustomer>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.xebia.fr/customer/v1_0/saveCustomer"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://ws.xebia.fr/customer/v1_0/zeNoisyOperation" name="zeNoisyOperation" bindingOperationName="zeNoisyOperation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="test-1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/production-ready-application/services/v1.0/customerService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://ws.xebia.fr/customer/v1_0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v1:zeNoisyOperation>
+         <v1:id>5</v1:id>
+      </v1:zeNoisyOperation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>admin</con:username><con:password>admin</con:password></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.xebia.fr/customer/v1_0/zeNoisyOperation"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://ws.xebia.fr/customer/v1_0/zeSlowOperation" name="zeSlowOperation" bindingOperationName="zeSlowOperation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/production-ready-application/services/v1.0/customerService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://ws.xebia.fr/customer/v1_0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v1:zeSlowOperation>
+         <v1:id>?</v1:id>
+      </v1:zeSlowOperation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.xebia.fr/customer/v1_0/zeSlowOperation"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://ws.xebia.fr/customer/v1_0/zeVerySlowAggregatingOperation" name="zeVerySlowAggregatingOperation" bindingOperationName="zeVerySlowAggregatingOperation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/production-ready-application/services/v1.0/customerService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://ws.xebia.fr/customer/v1_0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v1:zeVerySlowAggregatingOperation>
+         <v1:id>?</v1:id>
+      </v1:zeVerySlowAggregatingOperation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.xebia.fr/customer/v1_0/zeVerySlowAggregatingOperation"/></con:call></con:operation><con:operation isOneWay="false" action="http://ws.xebia.fr/customer/v1_0/zeJmsOperation" name="zeJmsOperation" bindingOperationName="zeJmsOperation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/production-ready-application/services/v1.0/customerService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://ws.xebia.fr/customer/v1_0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v1:zeJmsOperation>
+         <v1:in>?</v1:in>
+      </v1:zeJmsOperation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.xebia.fr/customer/v1_0/zeJmsOperation"/></con:call></con:operation><con:operation isOneWay="false" action="http://ws.xebia.fr/customer/v1_0/zeBuggyOperation" name="zeBuggyOperation" bindingOperationName="zeBuggyOperation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="test 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/production-ready-application/services/v1.0/customerService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://ws.xebia.fr/customer/v1_0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v1:zeBuggyOperation>
+         <v1:id>1</v1:id>
+      </v1:zeBuggyOperation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>admin</con:username><con:password>admin</con:password></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.xebia.fr/customer/v1_0/zeBuggyOperation"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite name="CustomerServiceTestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="AllOperationsTestCase" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword=""><con:settings/><con:testStep type="request" name="TestGetCustomer"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>customerServiceSOAP</con:interface><con:operation>getCustomer</con:operation><con:request name="TestGetCustomer"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/production-ready-application/services/v1.0/customerService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://ws.xebia.fr/customer/v1_0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v1:getCustomer>
+         <v1:id>5</v1:id>
+      </v1:getCustomer>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:assertion type="SOAP Fault Assertion"/><con:credentials><con:username>admin</con:username><con:password>admin</con:password><con:domain/></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="TestZeNoisyOperation"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>customerServiceSOAP</con:interface><con:operation>zeNoisyOperation</con:operation><con:request name="TestZeNoisyOperation"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/production-ready-application/services/v1.0/customerService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://ws.xebia.fr/customer/v1_0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v1:zeNoisyOperation>
+         <v1:id>3</v1:id>
+      </v1:zeNoisyOperation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:username>admin</con:username><con:password>admin</con:password><con:domain/></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="TestZeSlowOperation"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>customerServiceSOAP</con:interface><con:operation>zeSlowOperation</con:operation><con:request name="TestZeSlowOperation"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/production-ready-application/services/v1.0/customerService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://ws.xebia.fr/customer/v1_0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v1:zeSlowOperation>
+         <v1:id>7</v1:id>
+      </v1:zeSlowOperation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:username>admin</con:username><con:password>admin</con:password><con:domain/></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="TestZeVerySlowOperation"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>customerServiceSOAP</con:interface><con:operation>zeVerySlowAggregatingOperation</con:operation><con:request name="TestZeVerySlowOperation"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/production-ready-application/services/v1.0/customerService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://ws.xebia.fr/customer/v1_0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v1:zeVerySlowAggregatingOperation>
+         <v1:id>2</v1:id>
+      </v1:zeVerySlowAggregatingOperation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:username>admin</con:username><con:password>admin</con:password></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="TestZeBuggyOperation"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>customerServiceSOAP</con:interface><con:operation>zeBuggyOperation</con:operation><con:request name="TestZeBuggyOperation"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/production-ready-application/services/v1.0/customerService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://ws.xebia.fr/customer/v1_0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v1:zeBuggyOperation>
+         <v1:id>1</v1:id>
+      </v1:zeBuggyOperation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:username>admin</con:username><con:password>admin</con:password></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="TestZeJmsOperation"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>customerServiceSOAP</con:interface><con:operation>zeJmsOperation</con:operation><con:request name="TestZeJmsOperation"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/production-ready-application/services/v1.0/customerService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://ws.xebia.fr/customer/v1_0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v1:zeJmsOperation>
+         <v1:in>3</v1:in>
+      </v1:zeJmsOperation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:username>admin</con:username><con:password>admin</con:password></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:loadTest name="AllOperationsLoadTest"><con:settings/><con:threadCount>10</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>6000</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="NoisyOperationTestCase" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword=""><con:settings/><con:testStep type="request" name="TestZeNoisyOperation"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>customerServiceSOAP</con:interface><con:operation>zeNoisyOperation</con:operation><con:request name="TestZeNoisyOperation"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/production-ready-application/services/v1.0/customerService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://ws.xebia.fr/customer/v1_0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v1:zeNoisyOperation>
+         <v1:id>3</v1:id>
+      </v1:zeNoisyOperation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:username>admin</con:username><con:password>admin</con:password><con:domain/></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:loadTest name="ZeNoisyOperationLoadTest"><con:settings/><con:threadCount>10</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>6000</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="ZeSlowOperationTestCase" searchProperties="true"><con:settings/><con:testStep type="request" name="TestSlowOperation"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>customerServiceSOAP</con:interface><con:operation>zeSlowOperation</con:operation><con:request name="TestSlowOperation"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/production-ready-application/services/v1.0/customerService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://ws.xebia.fr/customer/v1_0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v1:zeSlowOperation>
+         <v1:id>1</v1:id>
+      </v1:zeSlowOperation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:username>admin</con:username><con:password>admin</con:password></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:loadTest name="ZeSlowOperationLoadTest"><con:settings/><con:threadCount>100</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>6000</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="ZeBuggyOperationTestCase" searchProperties="true"><con:settings/><con:testStep type="request" name="TestZeBuggyOperation"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>customerServiceSOAP</con:interface><con:operation>zeBuggyOperation</con:operation><con:request name="TestZeBuggyOperation"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/production-ready-application/services/v1.0/customerService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://ws.xebia.fr/customer/v1_0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v1:zeBuggyOperation>
+         <v1:id>1</v1:id>
+      </v1:zeBuggyOperation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:username>admin</con:username><con:password>admin</con:password></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:loadTest name="ZeBuggyOperationLoadTest"><con:settings/><con:threadCount>5</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>6000</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="ZeVerySlowAggregatingOperationTestCase" searchProperties="true"><con:settings/><con:testStep type="request" name="TestZeVerySlowOperation"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>customerServiceSOAP</con:interface><con:operation>zeVerySlowAggregatingOperation</con:operation><con:request name="TestZeVerySlowOperation"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/production-ready-application/services/v1.0/customerService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://ws.xebia.fr/customer/v1_0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v1:zeVerySlowAggregatingOperation>
+         <v1:id>1</v1:id>
+      </v1:zeVerySlowAggregatingOperation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:username>admin</con:username><con:password>admin</con:password></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:loadTest name="ZeVerySlowAggregatingOperationLoadTest"><con:settings/><con:threadCount>5</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>60</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/></con:soapui-project>

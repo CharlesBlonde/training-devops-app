@@ -115,6 +115,20 @@
                </xsd:sequence>
             </xsd:complexType>
          </xsd:element>
+         <xsd:element name="zeBuggyOperation">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="id" type="xsd:long"></xsd:element>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="zeBuggyOperationResponse">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="out" type="xsd:string"></xsd:element>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
       </xsd:schema>
    </wsdl:types>
    <wsdl:message name="getCustomerRequest">
@@ -156,6 +170,12 @@
    <wsdl:message name="zeJmsOperationResponse">
       <wsdl:part name="parameters" element="tns:zeJmsOperationResponse"></wsdl:part>
    </wsdl:message>
+   <wsdl:message name="zeBuggyOperationRequest">
+      <wsdl:part name="parameters" element="tns:zeBuggyOperation"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="zeBuggyOperationResponse">
+      <wsdl:part name="parameters" element="tns:zeBuggyOperationResponse"></wsdl:part>
+   </wsdl:message>
    <wsdl:portType name="customerService">
       <wsdl:operation name="getCustomer">
          <wsdl:input message="tns:getCustomerRequest" />
@@ -181,6 +201,10 @@
       <wsdl:operation name="zeJmsOperation">
          <wsdl:input message="tns:zeJmsOperationRequest"></wsdl:input>
          <wsdl:output message="tns:zeJmsOperationResponse"></wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="zeBuggyOperation">
+         <wsdl:input message="tns:zeBuggyOperationRequest"></wsdl:input>
+         <wsdl:output message="tns:zeBuggyOperationResponse"></wsdl:output>
       </wsdl:operation>
    </wsdl:portType>
    <wsdl:binding name="customerServiceSOAP" type="tns:customerService">
@@ -235,6 +259,15 @@
       </wsdl:operation>
       <wsdl:operation name="zeJmsOperation">
          <soap:operation soapAction="http://ws.xebia.fr/customer/v1_0/zeJmsOperation" />
+         <wsdl:input>
+            <soap:body use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="zeBuggyOperation">
+         <soap:operation soapAction="http://ws.xebia.fr/customer/v1_0/zeBuggyOperation" />
          <wsdl:input>
             <soap:body use="literal" />
          </wsdl:input>

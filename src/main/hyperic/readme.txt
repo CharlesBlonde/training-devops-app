@@ -1,0 +1,1 @@
+Copy these Hyperic plugins under $HYPERIC_HOME/hq-plugins (e.g. next to $HYPERIC_HOME/agent-4.4.0 and $HYPERIC_HOME/server-4.4.0)

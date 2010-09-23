@@ -16,11 +16,13 @@
 package fr.xebia.test;
 
 import org.apache.log4j.Logger;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
 
 public class LoggerTest {
 
+    @Ignore("don't saturate sysout")
     @Test
     public void testLog4j() throws Exception {
 
@@ -31,6 +33,7 @@ public class LoggerTest {
         }
     }
     
+    @Ignore("don't saturate sysout")
     @Test
     public void testLogback() throws Exception {
 

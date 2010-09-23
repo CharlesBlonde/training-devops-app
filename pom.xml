@@ -1,12 +1,15 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
    <modelVersion>4.0.0</modelVersion>
    <groupId>fr.xebia.training</groupId>
    <artifactId>production-ready-application</artifactId>
    <packaging>war</packaging>
-   <version>0.0.1-SNAPSHOT</version>
+   <version>0.0.2-teacher-SNAPSHOT</version>
    <name>production-ready-application Maven Webapp</name>
+   <scm>
+      <connection>scm:svn:http://xebia-france.googlecode.com/svn/training/production-ready-application/branches/teacher-branch</connection>
+      <developerConnection>scm:svn:https://xebia-france.googlecode.com/svn/training/production-ready-application/branches/teacher-branch</developerConnection>
+   </scm>
    <dependencies>
       <!-- Spring framework -->
       <dependency>
@@ -164,7 +167,7 @@
       <dependency>
          <groupId>fr.xebia.management.extras</groupId>
          <artifactId>xebia-management-extras</artifactId>
-         <version>0.0.7-SNAPSHOT</version>
+         <version>0.0.7</version>
       </dependency>
       <dependency>
          <groupId>fr.xebia.springframework</groupId>

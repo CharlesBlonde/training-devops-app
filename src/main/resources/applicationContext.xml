@@ -243,7 +243,7 @@
       <property name="anotherVerySlowService" ref="anotherVerySlowService" />
       <property name="zeVerylowService" ref="zeVerySlowService" />
    </bean>
-   
+
    <bean id="zeVerySlowAggregatingServiceParallelImpl" class="fr.xebia.productionready.service.ZeVerySlowAggregatingServiceParallelImpl">
       <property name="anotherVerySlowService" ref="anotherVerySlowService" />
       <property name="anotherVerySlowServiceExecutor" ref="anotherVerySlowServiceExecutorThreadPool" />
@@ -251,6 +251,9 @@
       <property name="zeVerySlowServiceExecutor" ref="zeVerySlowServiceExecutorThreadPool" />
    </bean>
 
+   <bean id="zeJmsService" class="fr.xebia.productionready.service.ZeJmsService">
+      <property name="connectionFactory" ref="connectionFactory" />
+   </bean>
 
    <bean id="customerCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
       <property name="cacheManager" ref="cacheManager" />
@@ -260,10 +263,10 @@
       <property name="timeToLive" value="30" />
    </bean>
 
-
    <bean id="customerServiceImpl" class="fr.xebia.ws.customer.v1_0.CustomerServiceImpl">
       <property name="customerCache" ref="customerCache" />
       <property name="zeBuggyService" ref="zeBuggyService" />
+      <property name="zeJmsService" ref="zeJmsService" />
       <property name="zeNoisyService" ref="zeNoisyService" />
       <property name="zeSlowService" ref="zeSlowService" />
       <property name="zeVerySlowAggregatingService" ref="zeVerySlowAggregatingServiceParallelImpl" />

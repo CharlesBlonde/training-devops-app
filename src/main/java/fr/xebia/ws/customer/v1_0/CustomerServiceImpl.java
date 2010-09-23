@@ -23,6 +23,7 @@ import javax.xml.ws.Holder;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
+import org.apache.commons.lang.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
@@ -33,9 +34,11 @@ import fr.xebia.audit.Audited;
 import fr.xebia.productionready.backend.zebuggyservice.ZeBuggyPerson;
 import fr.xebia.productionready.backend.zebuggyservice.ZeBuggyService;
 import fr.xebia.productionready.backend.zebuggyservice.ZeBuggyServiceException;
+import fr.xebia.productionready.backend.zebuggyservice.ZeBuggyServiceRuntimeException;
 import fr.xebia.productionready.backend.zenoisyservice.ZeNoisyService;
 import fr.xebia.productionready.backend.zeslowservice.ZeSlowPerson;
 import fr.xebia.productionready.backend.zeslowservice.ZeSlowService;
+import fr.xebia.productionready.service.ZeJmsService;
 import fr.xebia.productionready.service.ZeVerySlowAggregatingService;
 
 @ManagedResource(objectName = "fr.xebia:service=CustomerService,type=CustomerServiceImpl")
@@ -47,14 +50,16 @@ public class CustomerServiceImpl implements CustomerService {
 
     private final Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
 
-    private Random random = new Random();
+    private final Random random = new Random();
 
     private ZeBuggyService zeBuggyService;
+
+    private ZeJmsService zeJmsService;
 
     private ZeNoisyService zeNoisyService;
 
     private ZeSlowService zeSlowService;
-    
+
     private ZeVerySlowAggregatingService zeVerySlowAggregatingService;
 
     private void doSomeWork(long id, Customer customer) throws CustomerNotFoundException {
@@ -141,6 +146,10 @@ public class CustomerServiceImpl implements CustomerService {
         this.zeBuggyService = zeBuggyService;
     }
 
+    public void setZeJmsService(ZeJmsService zeJmsService) {
+        this.zeJmsService = zeJmsService;
+    }
+
     public void setZeNoisyService(ZeNoisyService zeNoisyService) {
         this.zeNoisyService = zeNoisyService;
     }
@@ -182,6 +191,24 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public String zeBuggyOperation(long id) {
+        try {
+            return ObjectUtils.toString(zeBuggyService.find(id), "#null#");
+        } catch (ZeBuggyServiceRuntimeException e) {
+            throw new RuntimeException(e);
+        } catch (ZeBuggyServiceException e) {
+            throw new RuntimeException(e);
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public String zeJmsOperation(String in) {
+        return zeJmsService.jmsRequestReply(in);
+    }
+
+    @Override
     public String zeNoisyOperation(long id) {
         return zeNoisyService.doNoisyJob(id);
     }
@@ -194,11 +221,5 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public String zeVerySlowAggregatingOperation(long id) {
         return zeVerySlowAggregatingService.doWork(id);
-    }
-
-    @Override
-    public String zeJmsOperation(String in) {
-        // TODO Auto-generated method stub
-        return null;
     }
 }

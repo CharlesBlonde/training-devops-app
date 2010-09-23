@@ -42,15 +42,14 @@ public class ZeSlowServiceBoundedImpl implements ZeSlowService {
 
         invocationCount.incrementAndGet();
         try {
-            // copy the instance variable in a local variable to allow hot
-            // reconfiguration
-            Semaphore usedSemaphore = this.semaphore;
-            boolean acquired = usedSemaphore.tryAcquire(semaphoreAcquireTimeoutInMillis, TimeUnit.MILLISECONDS);
+            // copy the semaphore instance reference into a local reference to allow hot reconfiguration
+            Semaphore activeSemaphore = this.semaphore;
+            boolean acquired = activeSemaphore.tryAcquire(semaphoreAcquireTimeoutInMillis, TimeUnit.MILLISECONDS);
             if (acquired) {
                 try {
                     return zeSlowService.find(id);
                 } finally {
-                    usedSemaphore.release();
+                    activeSemaphore.release();
                 }
             } else {
                 rejectedInvocationCount.incrementAndGet();
@@ -58,8 +57,8 @@ public class ZeSlowServiceBoundedImpl implements ZeSlowService {
             }
         } catch (InterruptedException e) {
             rejectedInvocationCount.incrementAndGet();
-            throw new RuntimeException("Too many concurrent access to ZeSlowService", e);
-        }
+            Thread.currentThread().interrupt();
+            throw new RuntimeException("Interrupted waiting to access to the ZeSlowService", e);        }
     }
 
     @ManagedAttribute

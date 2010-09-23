@@ -29,10 +29,6 @@ import org.springframework.jms.core.SessionCallback;
 
 public class ZeJmsService {
 
-    public void setConnectionFactory(ConnectionFactory connectionFactory) {
-        this.jmsTemplate.setConnectionFactory(connectionFactory);
-    }
-
     private JmsTemplate jmsTemplate = new JmsTemplate();
 
     /**
@@ -51,28 +47,35 @@ public class ZeJmsService {
 
                     // REQUEST
                     MessageProducer messageProducer = session.createProducer(queue);
+                    String correlationId;
                     try {
                         Message requestMessage = session.createTextMessage("hello world " + in);
                         requestMessage.setJMSReplyTo(replyToQueue);
                         messageProducer.send(requestMessage);
+                        correlationId = requestMessage.getJMSMessageID();
                     } finally {
                         messageProducer.close();
                     }
 
                     // RESPONSE
-                    MessageConsumer messageConsumer = session.createConsumer(replyToQueue);
+                    MessageConsumer messageConsumer = session.createConsumer(replyToQueue, "JMSCorrelationID = '" + correlationId + "'");
                     try {
                         Message responseMessage = messageConsumer.receive(1000);
-                        return responseMessage.toString();
+                        return responseMessage == null ? "#null#" : responseMessage.toString();
                     } finally {
                         messageConsumer.close();
                     }
                 } finally {
-                    replyToQueue.delete();
+                    // don't close the temporary queue to prevent ActiveMQ "JMSException: A consumer is consuming from the temporary destination"
+                    // replyToQueue.delete();
                 }
             }
         }, true);
 
         return response;
+    }
+
+    public void setConnectionFactory(ConnectionFactory connectionFactory) {
+        this.jmsTemplate.setConnectionFactory(connectionFactory);
     }
 }

@@ -58,7 +58,15 @@ public class HelloWorldServiceMessageListener implements SessionAwareMessageList
         if (destination != null) {
             MessageProducer messageProducer = session.createProducer(destination);
             try {
-                messageProducer.send(session.createTextMessage(response));
+                TextMessage responseMessage = session.createTextMessage(response);
+                String correlationId;
+                if(message.getJMSCorrelationID() == null) {
+                    correlationId = message.getJMSMessageID();
+                } else {
+                    correlationId = message.getJMSCorrelationID();
+                }
+                responseMessage.setJMSCorrelationID(correlationId);
+                messageProducer.send(responseMessage);
             } finally {
                 messageProducer.close();
             }
