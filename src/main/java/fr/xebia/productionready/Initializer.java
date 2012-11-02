@@ -15,20 +15,18 @@
  */
 package fr.xebia.productionready;
 
-import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.sql.DataSource;
-
+import fr.xebia.springframework.security.core.userdetails.ExtendedUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.provisioning.UserDetailsManager;
 
-import fr.xebia.springframework.security.core.userdetails.ExtendedUser;
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -64,8 +62,8 @@ public class Initializer implements InitializingBean {
         }
 
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        authorities.add(new GrantedAuthorityImpl("ROLE_USER"));
-        authorities.add(new GrantedAuthorityImpl("ROLE_ADMIN"));
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 
         ExtendedUser user = new ExtendedUser("admin", "admin", true, true, true, true, authorities);
         user.setComments("my first comment");
@@ -73,7 +71,7 @@ public class Initializer implements InitializingBean {
 
         userDetailsManager.createUser(user);
 
-        logger.warn("initialized");
+        logger.warn("Application successfully initialized");
     }
 
     public DataSource getDataSource() {

@@ -19,6 +19,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.joda.time.LocalDate;
 
 /**
  * @author <a href="mailto:cyrille.leclerc@pobox.com">Cyrille Le Clerc</a>
@@ -27,7 +28,7 @@ public class ZeSlowPerson implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Date birthDate;
+    private LocalDate birthDate;
 
     private String firstName;
 
@@ -37,14 +38,14 @@ public class ZeSlowPerson implements Serializable {
         super();
     }
 
-    public ZeSlowPerson(String firstName, String lastName, Date birthDate) {
+    public ZeSlowPerson(String firstName, String lastName, LocalDate birthDate) {
         this();
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
@@ -56,7 +57,7 @@ public class ZeSlowPerson implements Serializable {
         return lastName;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 

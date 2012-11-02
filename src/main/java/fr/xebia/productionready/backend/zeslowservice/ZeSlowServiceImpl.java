@@ -18,6 +18,7 @@ package fr.xebia.productionready.backend.zeslowservice;
 import java.util.Date;
 import java.util.Random;
 
+import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
@@ -59,7 +60,7 @@ public class ZeSlowServiceImpl implements ZeSlowService {
             logger.warn("InterruptedException", e);
         }
 
-        return new ZeSlowPerson("first-name-" + id, "last-name-" + id, new Date());
+        return new ZeSlowPerson("first-name-" + id, "last-name-" + id, LocalDate.now());
     }
 
     @ManagedAttribute
