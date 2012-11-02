@@ -335,6 +335,11 @@
                </execution>
             </executions>
          </plugin>
+         <plugin>
+              <groupId>com.cloudbees</groupId>
+              <artifactId>bees-maven-plugin</artifactId>
+              <version>1.3.2</version>
+         </plugin>
       </plugins>
    </build>
    <properties>
@@ -345,4 +350,14 @@
       <hibernate-core.version>4.1.7.Final</hibernate-core.version>
       <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
    </properties>
+    <distributionManagement>
+        <repository>
+            <id>xebia-france-release</id>
+            <url>dav:https://repository-xebia-france.forge.cloudbees.com/release/</url>
+        </repository>
+        <snapshotRepository>
+            <id>xebia-france-snapshot</id>
+            <url>dav:https://repository-xebia-france.forge.cloudbees.com/snapshot/</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
