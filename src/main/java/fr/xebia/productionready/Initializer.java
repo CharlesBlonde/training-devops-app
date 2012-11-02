@@ -19,8 +19,12 @@ import fr.xebia.springframework.security.core.userdetails.ExtendedUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.security.authentication.dao.ReflectionSaltSource;
+import org.springframework.security.authentication.dao.SaltSource;
+import org.springframework.security.authentication.encoding.LdapShaPasswordEncoder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.provisioning.UserDetailsManager;
 
 import javax.sql.DataSource;
@@ -32,7 +36,7 @@ import java.util.List;
  * <p>
  * Initialize the application (add rows in the database, etc).
  * </p>
- * 
+ *
  * @author <a href="mailto:cyrille@cyrilleleclerc.com">Cyrille Le Clerc</a>
  */
 public class Initializer implements InitializingBean {
@@ -65,9 +69,10 @@ public class Initializer implements InitializingBean {
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
         authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 
-        ExtendedUser user = new ExtendedUser("admin", "admin", true, true, true, true, authorities);
-        user.setComments("my first comment");
-        user.setAllowedRemoteAddresses("10\\..*, 127\\..*, 0:0:0:0:0:0:0:1%0");
+        LdapShaPasswordEncoder passwordEncoder = new LdapShaPasswordEncoder();
+
+        String encodedPassword = passwordEncoder.encodePassword("admin", "admin-salt".getBytes());
+        User user = new User("admin", encodedPassword, true, true, true, true, authorities);
 
         userDetailsManager.createUser(user);
 

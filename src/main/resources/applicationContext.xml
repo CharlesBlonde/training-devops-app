@@ -26,6 +26,8 @@
         http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core-5.7.0.xsd">
 
 
+    <context:property-placeholder system-properties-mode="OVERRIDE"/>
+
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
     <context:annotation-config/>
@@ -36,7 +38,7 @@
     <management:application-version-mbean/>
 
     <!-- JMX -->
-    <management:servlet-context-aware-mbean-server id="mbeanServer"/>
+    <context:mbean-server id="mbeanServer"/>
     <context:mbean-export server="mbeanServer"/>
 
 
@@ -47,37 +49,17 @@
         <sec:anonymous/>
     </sec:http>
 
+
     <sec:authentication-manager>
-        <sec:authentication-provider ref="authenticationProvider"/>
+        <sec:authentication-provider>
+            <sec:password-encoder hash="{sha}">
+                <sec:salt-source user-property="username"/>
+            </sec:password-encoder>
+            <sec:jdbc-user-service data-source-ref="dataSource"/>
+        </sec:authentication-provider>
     </sec:authentication-manager>
 
-    <bean id="userDetailsManager"
-          class="fr.xebia.springframework.security.core.userdetails.jdbc.ExtendedJdbcUserDetailsManager">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="userCache" ref="userCache"/>
-    </bean>
-    <bean id="authenticationProvider"
-          class="fr.xebia.springframework.security.core.providers.ExtendedDaoAuthenticationProvider">
-        <property name="passwordEncoder">
-            <bean class="org.springframework.security.authentication.encoding.LdapShaPasswordEncoder"/>
-        </property>
-        <property name="saltSource">
-            <bean class="org.springframework.security.authentication.dao.ReflectionSaltSource">
-                <property name="userPropertyToUse" value="getUsername"/>
-            </bean>
-        </property>
-        <property name="userCache" ref="userCache"/>
-        <property name="userDetailsService" ref="userDetailsManager"/>
-    </bean>
-
-    <bean id="userCache" class="org.springframework.security.core.userdetails.cache.EhCacheBasedUserCache">
-        <property name="cache">
-            <bean class="org.springframework.cache.ehcache.EhCacheFactoryBean">
-                <property name="cacheManager" ref="cacheManager"/>
-                <property name="cacheName" value="org.springframework.security.userdetails.UserDetails"/>
-            </bean>
-        </property>
-    </bean>
+    <sec:jdbc-user-service id="userDetailsManager" data-source-ref="dataSource"/>
 
     <!-- JPA / ENTITY MANAGER / HIBERNATE -->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
@@ -136,8 +118,15 @@
 
 
     <!-- CXF -->
+    <import resource="classpath:META-INF/cxf/cxf.xml"/>
+    <bean id="responseTimeFeature" class="org.apache.cxf.management.interceptor.ResponseTimeFeature"/>
 
-    <cxf:bus id="cxf" name="production-ready-application-cxf-bus"/>
+    <cxf:bus id="cxf" name="mybus" >
+        <cxf:features>
+            <cxf:logging/>
+            <ref bean="responseTimeFeature"/>
+        </cxf:features>
+    </cxf:bus>
 
     <bean id="org.apache.cxf.management.InstrumentationManager"
           class="org.apache.cxf.management.jmx.InstrumentationManagerImpl">
@@ -145,19 +134,13 @@
         <property name="enabled" value="true"/>
         <property name="createMBServerConnectorFactory" value="false"/>
     </bean>
-    <!--
     <bean id="CounterRepository" class="org.apache.cxf.management.counters.CounterRepository">
         <property name="bus" ref="cxf"/>
     </bean>
--->
     <bean id="helloWorldServiceImpl" class="fr.xebia.productionready.service.HelloWorldServiceImpl"/>
     <jaxws:endpoint id="helloWorldService" implementor="#helloWorldServiceImpl" address="/helloWorldService"
                     endpointName="se:helloWorldServiceSOAP"
                     serviceName="se:helloWorldService" xmlns:se="http://www.xebia.fr/productionready/webservice">
-        <jaxws:features>
-            <bean class="org.apache.cxf.feature.LoggingFeature"/>
-            <bean class="org.apache.cxf.management.interceptor.ResponseTimeFeature"/>
-        </jaxws:features>
         <jaxws:properties>
             <entry key="faultStackTraceEnabled" value="true"/>
         </jaxws:properties>
@@ -170,21 +153,6 @@
 
     <management:executor-service id="anotherVerySlowServiceExecutorThreadPool" pool-size="1-3" queue-capacity="15"/>
 
-
-    <!-- DATASOURCE -->
-
-    <management:dbcp-datasource id="embeddedDataSource">
-        <management:url value="jdbc:h2:mem:production-ready-application-db"/>
-        <management:driver-class-name value="org.h2.Driver"/>
-        <management:username value="sa"/>
-        <management:password value=""/>
-        <management:max-active value="7"/>
-    </management:dbcp-datasource>
-
-    <jee:jndi-lookup id="productionReadyApplicationDataSource"
-                     jndi-name="java:comp/env/jdbc/production-ready-application-data-source"/>
-
-    <alias name="embeddedDataSource" alias="dataSource"/>
 
     <!-- BUSINESS COMPONENTS -->
     <bean class="fr.xebia.productionready.Initializer">
@@ -299,5 +267,12 @@
         <property name="executorService" ref="helloWorldServiceListenerThreadPool"/>
     </bean>
 
-
+    <!-- DATASOURCE -->
+    <beans profile="default">
+        <jdbc:embedded-database type="H2" id="dataSource">
+        </jdbc:embedded-database>
+    </beans>
+    <beans profile="prod">
+        <jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/production-ready-application-data-source"/>
+    </beans>
 </beans>
