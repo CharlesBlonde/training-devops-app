@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<config>
+	<param name="spring.profiles.active" value="prod" />
+</config>
