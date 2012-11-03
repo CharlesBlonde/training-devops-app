@@ -1,4 +1,7 @@
 <?xml version="1.0"?>
+<!--
+bees config:update -a prod-ready-app-qa -ac atelier-xebia ./cloudbees-config-qa.xml
+-->
 <config>
-	<param name="spring.profiles.active" value="prod" />
+    <param name="spring.profiles.active" value="qa"/>
 </config>

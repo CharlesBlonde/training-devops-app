@@ -1,4 +1,7 @@
 <?xml version="1.0"?>
+<!--
+bees config:update -a prod-ready-app -ac atelier-xebia ./cloudbees-config.xml
+-->
 <config>
 	<param name="spring.profiles.active" value="prod" />
 </config>
