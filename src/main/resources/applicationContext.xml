@@ -32,7 +32,6 @@
 
     <context:annotation-config/>
     <tx:annotation-driven/>
-
     <security-extras:audit-aspect/>
     <management:profile-aspect server="mbeanServer"/>
     <management:application-version-mbean/>
@@ -40,7 +39,6 @@
     <!-- JMX -->
     <context:mbean-server id="mbeanServer"/>
     <context:mbean-export server="mbeanServer"/>
-
 
     <!-- SECURITY -->
     <sec:http auto-config='true' realm="Production Ready Application">
@@ -52,7 +50,7 @@
 
     <sec:authentication-manager>
         <sec:authentication-provider>
-            <sec:password-encoder hash="{sha}">
+            <sec:password-encoder hash="{ssha}">
                 <sec:salt-source user-property="username"/>
             </sec:password-encoder>
             <sec:jdbc-user-service data-source-ref="dataSource"/>
@@ -121,7 +119,7 @@
     <import resource="classpath:META-INF/cxf/cxf.xml"/>
     <bean id="responseTimeFeature" class="org.apache.cxf.management.interceptor.ResponseTimeFeature"/>
 
-    <cxf:bus id="cxf" name="mybus" >
+    <cxf:bus id="cxf" name="mybus">
         <cxf:features>
             <cxf:logging/>
             <ref bean="responseTimeFeature"/>

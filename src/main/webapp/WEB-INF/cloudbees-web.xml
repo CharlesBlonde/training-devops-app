@@ -1,23 +1,49 @@
 <?xml version="1.0"?>
 <cloudbees-web-app xmlns="http://www.cloudbees.com/xml/webapp/1">
 
-    <environment name="pprod">
-	    <resource name="jdbc/prod-ready-app" auth="Container" type="javax.sql.DataSource">
-	        <param name="username" value="prod-ready-app"/>
-	        <param name="password" value="ETwnLKPP46s"/>
-	        <param name="url" value="jdbc:cloudbees://prod-ready-app"/>
-	        <!-- Data Source settings -->
-	        <param name="defaultAutoCommit" value="false" />
-	        <!-- Connection Pool settings -->
-	        <param name="maxActive" value="5"/>
-	        <param name="maxIdle" value="2"/>
-	        <param name="maxWait" value="1000"/>
-	        <param name="removeAbandoned" value="true"/>
-	        <param name="removeAbandonedTimeout" value="60"/>
-	        <param name="logAbandoned" value="true"/>
-	        <!-- Purge invalid connections -->
-	        <param name="validationQuery" value="SELECT 1"/>
-	        <param name="testOnBorrow" value="true"/>
-	    </resource>
+    <environment name="prod">
+        <resource name="jdbc/prod-ready-app" auth="Container" type="javax.sql.DataSource">
+            <param name="username" value="prodreadyapp"/>
+            <param name="password" value="ETwnLKPP46s"/>
+            <param name="url" value="jdbc:cloudbees://prod-ready-app"/>
+
+
+            <!-- Data Source settings -->
+            <param name="defaultAutoCommit" value="false"/>
+            <!-- Connection Pool settings -->
+            <param name="maxActive" value="5"/>
+            <param name="maxIdle" value="2"/>
+            <param name="maxWait" value="1000"/>
+            <param name="removeAbandoned" value="true"/>
+            <param name="removeAbandonedTimeout" value="60"/>
+            <param name="logAbandoned" value="true"/>
+            <!-- Purge invalid connections -->
+            <param name="validationQuery" value="SELECT 1"/>
+            <param name="testOnBorrow" value="true"/>
+        </resource>
     </environment>
+
+    <environment name="default">
+        <resource name="jdbc/prod-ready-app" auth="Container" type="javax.sql.DataSource">
+            <param name="username" value="prodreadyapp-qa"/>
+            <param name="password" value="xXfWp6p2LtV"/>
+            <param name="url" value="jdbc:cloudbees://prod-ready-app-qa"/>
+
+
+            <!-- Data Source settings -->
+            <param name="defaultAutoCommit" value="false"/>
+            <!-- Connection Pool settings -->
+            <param name="maxActive" value="5"/>
+            <param name="maxIdle" value="2"/>
+            <param name="maxWait" value="1000"/>
+            <param name="removeAbandoned" value="true"/>
+            <param name="removeAbandonedTimeout" value="60"/>
+            <param name="logAbandoned" value="true"/>
+            <!-- Purge invalid connections -->
+            <param name="validationQuery" value="SELECT 1"/>
+            <param name="testOnBorrow" value="true"/>
+        </resource>
+    </environment>
+
+
 </cloudbees-web-app>
