@@ -3,7 +3,7 @@
 import javax.management.ObjectName;
 import javax.management.Query;
 
-import groovy.jmx.builder.JmxBuilder;
+import JmxBuilder;
 
 def cli = new CliBuilder( usage: 'groovy startJmsMessageListenerContainers [-h] -s servername -p port')
 cli.h(longOpt:'help', 'usage information')
@@ -19,7 +19,8 @@ if (opt.h) cli.usage()
 def jmx = new JmxBuilder()
 
 def jmxClient = jmx.connectorClient (host:opt.s ,port:opt.p)
-println("Stop JMS message listeners on $jmxClient")
+
+println("Start JMS message listeners on $jmxClient")
 
 jmxClient.connect()
 
@@ -28,12 +29,12 @@ def server = jmxClient.getMBeanServerConnection()
 // javax.jms:destination=my-destination,name="fr.xebia.springframework.jms.ManagedDefaultMessageListenerContainer#0",type=MessageListenerContainer,host=localhost,path=/production-ready-application
 server.queryNames(new ObjectName('javax.jms:type=MessageListenerContainer,*'), null).each { name ->
     def jmsMessageListenerContainer = new GroovyMBean(server, name)
-    jmsMessageListenerContainer.stop()
+    jmsMessageListenerContainer.start()
     if (jmsMessageListenerContainer.Running) {
-        println("FAILURE to stop jmsMessageListenerContainer $name !")
+        println("jmsMessageListenerContainer $name successfully started")
     } else {
-        println("jmsMessageListenerContainer $name successfully stopped")
+        println("FAILURE to start jmsMessageListenerContainer $name !")
     }
 }
 jmxClient.close()
-println "JMS message listeners successfully stopped. Bye"
+println "JMS message listeners successfully started. Bye"

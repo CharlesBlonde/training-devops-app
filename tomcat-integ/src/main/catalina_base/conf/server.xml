@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Server port="8005" shutdown="SHUTDOWN">
+
+    <Listener className="org.apache.catalina.core.JasperListener"/>
+    <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener"/>
+    <Listener className="org.apache.catalina.mbeans.ServerLifecycleListener"/>
+    <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener"/>
+    <GlobalNamingResources>
+    </GlobalNamingResources>
+    <Service name="Catalina">
+        <Connector port="8080" protocol="HTTP/1.1" connectionTimeout="20000" redirectPort="8443"/>
+
+        <Engine name="Catalina" defaultHost="localhost">
+
+            <Host name="localhost" appBase="webapps"
+                  unpackWARs="true" autoDeploy="true"
+                  xmlValidation="false" xmlNamespaceAware="false">
+
+                <Valve
+                        className="org.apache.catalina.valves.RemoteIpValve"
+                        remoteIpHeader="x-forwarded-for"
+                        remoteIpProxiesHeader="x-forwarded-by"
+                        protocolHeader="x-forwarded-proto"
+                        />
+
+                <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+                       prefix="localhost_access_log." suffix=".txt" pattern="common" resolveHosts="false"/>
+                <Context path="" docBase="ROOT">
+                    <Resource name="jdbc/prod-ready-app" auth="Container" type="javax.sql.DataSource"
+                              maxActive="5" maxIdle="2" maxWait="1000" defaultAutoCommit="false"
+                              validationQuery="SELECT 1" testOnBorrow="true"
+                              removeAbandonedTimeout="60" removeAbandoned="true"
+                              username="${jdbc_username}" password="${jdbc_password}" driverClassName="com.mysql.jdbc.Driver"
+                              url="${jdbc_url}"/>
+                </Context>
+            </Host>
+        </Engine>
+    </Service>
+</Server>

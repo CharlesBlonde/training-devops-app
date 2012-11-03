@@ -21,16 +21,16 @@ if (opt.h) cli.usage()
 @Grab(group='org.apache.activemq', module='activemq-core', version='5.5.0')
 @Grab(group='ch.qos.logback', module='logback-classic', version='0.9.28')
 
-import javax.jms.Connection
-import javax.jms.DeliveryMode
-import javax.jms.Message
-import javax.jms.MessageProducer
-import javax.jms.Queue
-import javax.jms.Session
-import javax.jms.TextMessage
+import Connection
+import DeliveryMode
+import Message
+import MessageProducer
+import Queue
+import Session
+import TextMessage
 
-import com.google.common.base.Joiner;
-import org.apache.activemq.ActiveMQConnectionFactory
+import Joiner;
+import ActiveMQConnectionFactory
 
 // COMMAND LINE PARAMETERS
 def activeMqUrl = opt.url 
