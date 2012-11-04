@@ -271,6 +271,6 @@
         </jdbc:embedded-database>
     </beans>
     <beans profile="prod">
-        <jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/prod-ready-app"/>
+        <jee:jndi-lookup id="dataSource" jndi-name="jdbc/prod-ready-app"/>
     </beans>
 </beans>
