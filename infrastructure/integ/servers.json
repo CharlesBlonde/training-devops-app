@@ -1,0 +1,16 @@
+{
+    "servers":[
+        {
+            "port":"6969",
+            "host":"tomcat1.integ.local",
+            "alias":"prod-ready-server-1",
+            "numQueryThreads":2
+        },
+        {
+            "port":"6969",
+            "host":"tomcat2.integ.local",
+            "alias":"prod-ready-server-2",
+            "numQueryThreads":2
+        }
+    ]
+}

@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>fr.xebia.training</groupId>
+    <groupId>fr.xebia.training.devops.prodreadyapp</groupId>
     <artifactId>production-ready-application</artifactId>
     <packaging>pom</packaging>
     <version>0.0.3-SNAPSHOT</version>
@@ -22,7 +22,11 @@
     </scm>
     <modules>
         <module>webapp</module>
-        <module>tomcat-integ</module>
+        <module>monitoring</module>
+        <module>management</module>
+        <module>infrastructure/integ/tomcat-integ</module>
+        <module>infrastructure/prod/tomcat-prod</module>
+        <module>infrastructure/localhost/tomcat-localhost</module>
     </modules>
     <dependencyManagement>
         <dependencies>
@@ -314,6 +318,11 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.3</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.7</version>
             </plugin>
         </plugins>
         <extensions>

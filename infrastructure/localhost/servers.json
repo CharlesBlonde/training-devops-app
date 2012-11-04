@@ -1,0 +1,10 @@
+{
+    "servers":[
+        {
+            "port":"6969",
+            "host":"localhost",
+            "alias":"localhost",
+            "numQueryThreads":2
+        }
+    ]
+}

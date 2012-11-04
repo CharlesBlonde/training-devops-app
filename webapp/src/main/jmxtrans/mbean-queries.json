@@ -1,0 +1,21 @@
+{
+    "queries":[
+        {
+            "obj":"java.util.concurrent:name=anotherVerySlowServiceExecutorThreadPool,type=ThreadPoolExecutor",
+            "resultAlias":"ThreadPoolExecutor.anotherVerySlowServiceExecutorThreadPool",
+            "attr":["CompletedTaskCount", "ActiveCount"]
+        },
+        {
+            "obj":"java.lang:type=Memory",
+            "attr":[ "HeapMemoryUsage", "NonHeapMemoryUsage" ]
+        },
+        {
+            "obj":"java.lang:name=CMS Old Gen,type=MemoryPool",
+            "attr":[ "Usage" ]
+        },
+        {
+            "obj":"java.lang:name=ConcurrentMarkSweep,type=GarbageCollector",
+            "attr":[ "LastGcInfo" ]
+        }
+    ]
+}
