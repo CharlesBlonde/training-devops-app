@@ -3,5 +3,5 @@
 bees config:update -a prod-ready-app-qa -ac atelier-xebia ./cloudbees-config-qa.xml
 -->
 <config>
-    <param name="spring.profiles.active" value="qa"/>
+    <param name="spring.profiles.active" value="prod"/>
 </config>
