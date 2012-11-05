@@ -4,7 +4,8 @@
             "@class" : "com.googlecode.jmxtrans.model.output.GraphiteWriter",
             "settings" : {
                 "port" : 2003,
-                "host" : "graphite"
+                "host" : "graphite",
+                "baseUrl" : "http://graphite.prod.xebia-tech-event.info"
             }
         }]
 }

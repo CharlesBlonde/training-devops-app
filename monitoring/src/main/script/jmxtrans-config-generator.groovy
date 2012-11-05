@@ -3,30 +3,29 @@
 import groovy.json.*
 import java.io.*
 
-def baseFolder, outputFile, serversFile, mbeanQueriesFile, outputFileName // , logger
+def outputFile, serversFile, outputwritersFile, mbeanQueriesFile, outputFileName // , logger
 
 // gmaven injects a $project variable
 if (binding.variables.containsKey("project")) {
-    baseFolder = "$project.basedir/src/main/template/"
     outputDir = "$project.build.directory/jmxtrans/"
 
     serversFile = new FileReader(project.properties.serversFile)
+    outputwritersFile = new FileReader(project.properties.outputWritersFile)
     mbeanQueriesFile = new FileReader(project.properties.mbeanQueriesFile)
     outputFile = new File(outputDir, project.properties.generatedJmxtransFile)
     logger = log
 } else {
     // standalone - debug mode
-    baseFolder = "../template/"
     outputDir = "../../../target/jmxtrans"
     serversFile = new FileReader("../../../../infrastructure/prod/servers.json")
+    outputwritersFile = new FileReader("../../../../infrastructure/prod/graphite-outputwriters.json")
     mbeanQueriesFile = new FileReader("../../../../webapp/src/main/jmxtrans/mbean-queries.json")
     outputFile = new File(outputDir, "prod-ready-app.jmxtrans.json")
 
     logger = new SysoutLogger()
 }
-def outputwritersFile = new FileReader("$baseFolder/outputwriters.json")
 
-logger.debug("baseFolder : " + new File(baseFolder).getAbsolutePath())
+logger.debug("Base folder: " + new File(".").getAbsolutePath())
 
 new File(outputDir).mkdirs()
 

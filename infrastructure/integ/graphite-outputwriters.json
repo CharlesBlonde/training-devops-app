@@ -1,0 +1,11 @@
+{
+    "outputWriters" : [
+        {
+            "@class" : "com.googlecode.jmxtrans.model.output.GraphiteWriter",
+            "settings" : {
+                "port" : 2003,
+                "host" : "graphite",
+                "baseUrl" : "http://graphite.integ.xebia-tech-event.info/"
+            }
+        }]
+}

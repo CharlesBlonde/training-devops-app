@@ -39,6 +39,7 @@
                         <configuration>
                             <properties>
                                 <serversFile>${project.basedir}/../infrastructure/integ/servers.json</serversFile>
+                                <outputWritersFile>${project.basedir}/../infrastructure/integ/graphite-outputwriters.json</outputWritersFile>
                                 <mbeanQueriesFile>${project.basedir}/../webapp/src/main/jmxtrans/mbean-queries.json
                                 </mbeanQueriesFile>
                                 <generatedJmxtransFile>
@@ -58,6 +59,7 @@
                             <properties>
                                 <!-- topology of the application servers -->
                                 <serversFile>${project.basedir}/../infrastructure/prod/servers.json</serversFile>
+                                <outputWritersFile>${project.basedir}/../infrastructure/prod/graphite-outputwriters.json</outputWritersFile>
                                 <mbeanQueriesFile>${project.basedir}/../webapp/src/main/jmxtrans/mbean-queries.json
                                 </mbeanQueriesFile>
                                 <generatedJmxtransFile>
@@ -77,6 +79,7 @@
                             <properties>
                                 <!-- topology of the application servers -->
                                 <serversFile>${project.basedir}/../infrastructure/localhost/servers.json</serversFile>
+                                <outputWritersFile>${project.basedir}/../infrastructure/localhost/graphite-outputwriters.json</outputWritersFile>
                                 <mbeanQueriesFile>${project.basedir}/../webapp/src/main/jmxtrans/mbean-queries.json
                                 </mbeanQueriesFile>
                                 <generatedJmxtransFile>
