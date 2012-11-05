@@ -1,13 +1,13 @@
 {
     "servers":[
         {
-            "port":"6969",
+            "port":"1099",
             "host":"tomcat1.ecommerce.local",
             "alias":"prod-ready-server-1",
             "numQueryThreads":2
         },
         {
-            "port":"6969",
+            "port":"1099",
             "host":"tomcat2.ecommerce.local",
             "alias":"prod-ready-server-2",
             "numQueryThreads":2
