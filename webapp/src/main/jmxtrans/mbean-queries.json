@@ -7,15 +7,13 @@
         },
         {
             "obj":"java.lang:type=Memory",
+            "resultAlias":"Jvm.Memory",
             "attr":[ "HeapMemoryUsage", "NonHeapMemoryUsage" ]
         },
         {
-            "obj":"java.lang:name=CMS Old Gen,type=MemoryPool",
-            "attr":[ "Usage" ]
-        },
-        {
-            "obj":"java.lang:name=ConcurrentMarkSweep,type=GarbageCollector",
-            "attr":[ "LastGcInfo" ]
+            "obj":"Catalina:j2eeType=Servlet,name=jsp,WebModule=//localhost/,J2EEApplication=none,J2EEServer=none",
+            "resultAlias":"Servlet.Jsp",
+            "attr":[ "requestCount", "errorCount", "processingTime" ]
         }
     ]
 }
