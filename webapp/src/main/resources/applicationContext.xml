@@ -66,13 +66,7 @@
         <property name="loadTimeWeaver">
             <bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver"/>
         </property>
-        <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="databasePlatform" value="org.hibernate.dialect.H2Dialect"/>
-                <property name="showSql" value="true"/>
-                <property name="generateDdl" value="true"/>
-            </bean>
-        </property>
+        <property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
         <property name="jpaProperties">
             <props>
                 <!-- Override properties defined in /META-INF/persistence.xml -->
@@ -269,8 +263,19 @@
     <beans profile="default">
         <jdbc:embedded-database type="H2" id="dataSource">
         </jdbc:embedded-database>
+        <bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+            <property name="databasePlatform" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="showSql" value="true"/>
+            <property name="generateDdl" value="true"/>
+        </bean>
     </beans>
     <beans profile="prod">
         <jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/prod-ready-app"/>
+
+        <bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+            <property name="databasePlatform" value="org.hibernate.dialect.MySQL5Dialect"/>
+            <property name="showSql" value="false"/>
+            <property name="generateDdl" value="true"/>
+        </bean>
     </beans>
 </beans>
