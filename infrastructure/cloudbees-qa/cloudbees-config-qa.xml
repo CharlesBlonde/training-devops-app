@@ -4,4 +4,8 @@ bees config:update -a prod-ready-app-qa -ac atelier-xebia ./cloudbees-config-qa.
 -->
 <config>
     <param name="spring.profiles.active" value="prod"/>
+    <param name="jdbc_username" value="prodreadyapp-qa"/>
+    <param name="jdbc_password" value="xXfWp6p2LtV"/>
+    <param name="jdbc_url" value="jdbc:cloudbees://prod-ready-app-qa"/>
+
 </config>
