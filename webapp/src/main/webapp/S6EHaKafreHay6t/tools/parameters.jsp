@@ -340,7 +340,9 @@
 
                 out.println("<tr><td valign='top'>" + propertyName + "</td><td>");
 
-                if (propertyName.indexOf("java.library.path") >= 0 || propertyName.indexOf("ws.ext.dirs") >= 0
+                if(propertyName.toLowerCase().contains("pwd") || propertyName.toLowerCase().contains("password")) {
+                    out.println("xxxxx");
+                } else if (propertyName.indexOf("java.library.path") >= 0 || propertyName.indexOf("ws.ext.dirs") >= 0
                         || propertyName.indexOf("java.class.path") >= 0 || propertyName.indexOf("sun.boot.class.path") >= 0) {
                     out.println("<pre>");
 
