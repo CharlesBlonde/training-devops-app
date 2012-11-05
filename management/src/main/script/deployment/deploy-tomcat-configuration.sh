@@ -65,6 +65,7 @@ tar -cvzf $BACKUP_ARCHIVE \
 
 echo "Shutdown tomcat server '$CATALINA_BASE/bin/catalina.sh stop' ..."
 $CATALINA_BASE/bin/catalina.sh stop
+sleep 5
 
 echo "Deploy new configuration ..."
 rsync -avz --del \
