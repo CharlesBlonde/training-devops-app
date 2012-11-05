@@ -55,26 +55,28 @@ public class Initializer implements InitializingBean {
 
         Connection connection = dataSource.getConnection();
         try {
-            String createUsersTable = "create table users(username varchar(256), password varchar(256), enabled int, allowedRemoteAddresses varchar(256), comments varchar(256))";
+            String createUsersTable = "create table if not exists users(username varchar(256), password varchar(256), enabled int, allowedRemoteAddresses varchar(256), comments varchar(256))";
             connection.createStatement().execute(createUsersTable);
 
-            String createAuthoritiesTable = "create table authorities(username varchar(256), authority varchar(256))";
+            String createAuthoritiesTable = "create table if not exists  authorities(username varchar(256), authority varchar(256))";
             connection.createStatement().execute(createAuthoritiesTable);
 
         } finally {
             connection.close();
         }
 
-        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        if (!userDetailsManager.userExists("admin")) {
+            List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+            authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 
-        LdapShaPasswordEncoder passwordEncoder = new LdapShaPasswordEncoder();
+            LdapShaPasswordEncoder passwordEncoder = new LdapShaPasswordEncoder();
 
-        String encodedPassword = passwordEncoder.encodePassword("admin", "admin-salt".getBytes());
-        User user = new User("admin", encodedPassword, true, true, true, true, authorities);
+            String encodedPassword = passwordEncoder.encodePassword("admin", "admin-salt".getBytes());
+            User user = new User("admin", encodedPassword, true, true, true, true, authorities);
 
-        userDetailsManager.createUser(user);
+            userDetailsManager.createUser(user);
+        }
 
         logger.warn("Application successfully initialized");
     }
