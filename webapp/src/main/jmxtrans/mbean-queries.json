@@ -3,7 +3,13 @@
         {
             "obj":"java.util.concurrent:name=anotherVerySlowServiceExecutorThreadPool,type=ThreadPoolExecutor",
             "resultAlias":"ThreadPoolExecutor.anotherVerySlowServiceExecutorThreadPool",
-            "attr":["CompletedTaskCount", "ActiveCount"]
+            "attr":["CompletedTaskCount", "ActiveCount"],
+            "graph": [
+                {
+                    "name":"AnotherVerySlowServiceExecutorThreadPool.CompletedTaskCount",
+                    "url": "${graphite.baseUrl}/render/?from=-24hours&target=sumSeries(servers.prod-ready-server-*.ThreadPoolExecutor.anotherVerySlowServiceExecutorThreadPool.CompletedTaskCount))"
+                }
+            ]
         },
         {
             "obj":"java.lang:type=Memory",
@@ -13,7 +19,17 @@
         {
             "obj":"Catalina:j2eeType=Servlet,name=jsp,WebModule=//localhost/,J2EEApplication=none,J2EEServer=none",
             "resultAlias":"Servlet.Jsp",
-            "attr":[ "requestCount", "errorCount", "processingTime" ]
+            "attr":[ "requestCount", "errorCount", "processingTime" ],
+            "graph": [
+                {
+                    "name":"Servlet.Jsp.requestCount",
+                    "url": "${graphite.baseUrl}/render/?from=-24hours&target=sumSeries(servers.prod-ready-server-*.Servlet.Jsp.requestCount))"
+                },
+                {
+                    "name":"Servlet.Jsp.errorCount",
+                    "url": "${graphite.baseUrl}/render/?from=-24hours&target=sumSeries(servers.prod-ready-server-*.Servlet.Jsp.errorCount))"
+                }
+            ]
         }
     ]
 }

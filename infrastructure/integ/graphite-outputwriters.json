@@ -5,7 +5,7 @@
             "settings" : {
                 "port" : 2003,
                 "host" : "graphite",
-                "baseUrl" : "http://graphite.integ.xebia-tech-event.info/"
+                "baseUrl" : "http://graphite.integ.xebia-tech-event.info"
             }
         }]
 }

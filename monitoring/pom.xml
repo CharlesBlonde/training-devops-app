@@ -39,7 +39,9 @@
                         <configuration>
                             <properties>
                                 <serversFile>${project.basedir}/../infrastructure/integ/servers.json</serversFile>
-                                <outputWritersFile>${project.basedir}/../infrastructure/integ/graphite-outputwriters.json</outputWritersFile>
+                                <outputWritersFile>
+                                    ${project.basedir}/../infrastructure/integ/graphite-outputwriters.json
+                                </outputWritersFile>
                                 <mbeanQueriesFile>${project.basedir}/../webapp/src/main/jmxtrans/mbean-queries.json
                                 </mbeanQueriesFile>
                                 <generatedJmxtransFile>
@@ -57,9 +59,10 @@
                         </goals>
                         <configuration>
                             <properties>
-                                <!-- topology of the application servers -->
                                 <serversFile>${project.basedir}/../infrastructure/prod/servers.json</serversFile>
-                                <outputWritersFile>${project.basedir}/../infrastructure/prod/graphite-outputwriters.json</outputWritersFile>
+                                <outputWritersFile>
+                                    ${project.basedir}/../infrastructure/prod/graphite-outputwriters.json
+                                </outputWritersFile>
                                 <mbeanQueriesFile>${project.basedir}/../webapp/src/main/jmxtrans/mbean-queries.json
                                 </mbeanQueriesFile>
                                 <generatedJmxtransFile>
@@ -77,9 +80,10 @@
                         </goals>
                         <configuration>
                             <properties>
-                                <!-- topology of the application servers -->
                                 <serversFile>${project.basedir}/../infrastructure/localhost/servers.json</serversFile>
-                                <outputWritersFile>${project.basedir}/../infrastructure/localhost/graphite-outputwriters.json</outputWritersFile>
+                                <outputWritersFile>
+                                    ${project.basedir}/../infrastructure/localhost/graphite-outputwriters.json
+                                </outputWritersFile>
                                 <mbeanQueriesFile>${project.basedir}/../webapp/src/main/jmxtrans/mbean-queries.json
                                 </mbeanQueriesFile>
                                 <generatedJmxtransFile>
@@ -87,6 +91,70 @@
                                 </generatedJmxtransFile>
                             </properties>
                             <source>${project.basedir}/src/main/script/jmxtrans-config-generator.groovy</source>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>generate-dashboard-integ</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <properties>
+                                <outputWritersFile>
+                                    ${project.basedir}/../infrastructure/integ/graphite-outputwriters.json
+                                </outputWritersFile>
+                                <dashboardTemplateFile>
+                                    ${project.basedir}/../webapp/src/main/jmxtrans/jmxtrans-dashboard.template
+                                </dashboardTemplateFile>
+                                <generatedDashboardFile>
+                                    production-ready-application-dashboard-${project.version}-integ.html
+                                </generatedDashboardFile>
+                            </properties>
+                            <source>${project.basedir}/src/main/script/jmxtrans-dashboard-generator.groovy</source>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>generate-dashboard-prod</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <properties>
+                                <outputWritersFile>
+                                    ${project.basedir}/../infrastructure/prod/graphite-outputwriters.json
+                                </outputWritersFile>
+                                <dashboardTemplateFile>
+                                    ${project.basedir}/../webapp/src/main/jmxtrans/jmxtrans-dashboard.template
+                                </dashboardTemplateFile>
+                                <generatedDashboardFile>
+                                    production-ready-application-dashboard-${project.version}-prod.html
+                                </generatedDashboardFile>
+                            </properties>
+                            <source>${project.basedir}/src/main/script/jmxtrans-dashboard-generator.groovy</source>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>generate-dashboard-localhost</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <properties>
+                                <outputWritersFile>
+                                    ${project.basedir}/../infrastructure/localhost/graphite-outputwriters.json
+                                </outputWritersFile>
+                                <dashboardTemplateFile>
+                                    ${project.basedir}/../webapp/src/main/jmxtrans/jmxtrans-dashboard.template
+                                </dashboardTemplateFile>
+                                <generatedDashboardFile>
+                                    production-ready-application-dashboard-${project.version}-localhost.html
+                                </generatedDashboardFile>
+                            </properties>
+                            <source>${project.basedir}/src/main/script/jmxtrans-dashboard-generator.groovy</source>
                         </configuration>
                     </execution>
                 </executions>
@@ -108,21 +176,43 @@
                                         target/jmxtrans/production-ready-application-jmxtrans-${project.version}-localhost.json
                                     </file>
                                     <type>json</type>
-                                    <classifier>localhost-jmxtrans</classifier>
+                                    <classifier>jmxtrans-localhost</classifier>
                                 </artifact>
                                 <artifact>
                                     <file>
                                         target/jmxtrans/production-ready-application-jmxtrans-${project.version}-integ.json
                                     </file>
                                     <type>json</type>
-                                    <classifier>integ-jmxtrans</classifier>
+                                    <classifier>jmxtrans-integ</classifier>
                                 </artifact>
                                 <artifact>
                                     <file>
                                         target/jmxtrans/production-ready-application-jmxtrans-${project.version}-prod.json
                                     </file>
                                     <type>json</type>
-                                    <classifier>prod-jmxtrans</classifier>
+                                    <classifier>jmxtrans-prod</classifier>
+                                </artifact>
+
+                                <artifact>
+                                    <file>
+                                        target/jmxtrans/production-ready-application-dashboard-${project.version}-localhost.html
+                                    </file>
+                                    <type>html</type>
+                                    <classifier>dashboard-localhost</classifier>
+                                </artifact>
+                                <artifact>
+                                    <file>
+                                        target/jmxtrans/production-ready-application-dashboard-${project.version}-integ.html
+                                    </file>
+                                    <type>html</type>
+                                    <classifier>dashboard-integ</classifier>
+                                </artifact>
+                                <artifact>
+                                    <file>
+                                        target/jmxtrans/production-ready-application-dashboard-${project.version}-prod.html
+                                    </file>
+                                    <type>html</type>
+                                    <classifier>dashboard-prod</classifier>
                                 </artifact>
                             </artifacts>
                         </configuration>

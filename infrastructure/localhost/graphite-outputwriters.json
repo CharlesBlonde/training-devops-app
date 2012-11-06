@@ -5,7 +5,7 @@
             "settings" : {
                 "port" : 2003,
                 "host" : "graphite",
-                "baseUrl" : "http://localhost:8888/"
+                "baseUrl" : "http://localhost:8888"
             }
         }]
 }

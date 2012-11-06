@@ -1,0 +1,22 @@
+<html>
+
+<body>
+
+<h1>Application Indicators</h1>
+
+<h2>AnotherVerySlowServiceExecutorThreadPool.CompletedTaskCount</h2>
+<img src="${graphite.baseUrl}/render/?from=-24hours&target=sumSeries(servers.prod-ready-server-*.ThreadPoolExecutor.anotherVerySlowServiceExecutorThreadPool.CompletedTaskCount)" />
+
+
+
+<h1>Middleware Indicators</h1>
+
+<h2>Servlet.Jsp.requestCount</h2>
+<img src="${graphite.baseUrl}/render/?from=-24hours&target=sumSeries(servers.prod-ready-server-*.Servlet.Jsp.requestCount))" />
+
+<h2>Servlet.Jsp.errorCount</h2>
+<img src="${graphite.baseUrl}/render/?from=-24hours&target=sumSeries(servers.prod-ready-server-*.Servlet.Jsp.errorCount))" />
+
+
+</body>
+</html>

@@ -3,7 +3,7 @@
         {
             "port":"1099",
             "host":"localhost",
-            "alias":"localhost",
+            "alias":"prod-ready-server-1",
             "numQueryThreads":2
         }
     ]

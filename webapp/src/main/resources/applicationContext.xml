@@ -28,7 +28,7 @@
         http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core-5.7.0.xsd">
 
 
-    <context:property-placeholder system-properties-mode="OVERRIDE" properties-ref="profileSpecificProperties" />
+    <context:property-placeholder system-properties-mode="OVERRIDE" properties-ref="profileSpecificProperties"/>
 
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
@@ -267,20 +267,38 @@
         <property name="executorService" ref="helloWorldServiceListenerThreadPool"/>
     </bean>
 
-    <!-- DATASOURCE -->
+    <util:properties id="smtpProperties">
+        <prop key="mail.smtp.host">${mail_host}</prop>
+        <prop key="mail.smtp.port">${mail_port}</prop>
+        <prop key="mail.smtp.auth">${mail_secure}</prop>
+        <prop key="mail.username">${mail_username}</prop>
+        <prop key="mail.password">${mail_password}</prop>
+        <prop key="mail.transport.protocol">smtp</prop>
+        <prop key="mail.smtp.starttls.enable">true</prop>
+        <prop key="mail.from">cleclerc@xebia.fr</prop>
+        <prop key="mail.fromname">Cyrille Le Clerc</prop>
+        <prop key="mail.debug">false</prop>
+    </util:properties>
+
+    <beans profile="prod">
+        <jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/prod-ready-app"/>
+
+        <util:properties id="profileSpecificProperties">
+            <prop key="hibernate_dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+        </util:properties>
+    </beans>
+
     <beans profile="default">
         <jdbc:embedded-database type="H2" id="dataSource">
         </jdbc:embedded-database>
 
         <util:properties id="profileSpecificProperties">
             <prop key="hibernate_dialect">org.hibernate.dialect.H2Dialect</prop>
-        </util:properties>
-    </beans>
-    <beans profile="prod">
-        <jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/prod-ready-app"/>
-
-        <util:properties id="profileSpecificProperties">
-            <prop key="hibernate_dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+            <prop key="mail_host">smtp.local</prop>
+            <prop key="mail_port">587</prop>
+            <prop key="mail_secure">true</prop>
+            <prop key="mail_username">my_username</prop>
+            <prop key="mail_password">my_password</prop>
         </util:properties>
     </beans>
 </beans>
