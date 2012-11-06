@@ -3,33 +3,39 @@
         {
             "obj":"java.util.concurrent:name=anotherVerySlowServiceExecutorThreadPool,type=ThreadPoolExecutor",
             "resultAlias":"ThreadPoolExecutor.anotherVerySlowServiceExecutorThreadPool",
-            "attr":["CompletedTaskCount", "ActiveCount"],
-            "graph": [
-                {
-                    "name":"AnotherVerySlowServiceExecutorThreadPool.CompletedTaskCount",
-                    "url": "${graphite.baseUrl}/render/?from=-24hours&target=sumSeries(servers.prod-ready-server-*.ThreadPoolExecutor.anotherVerySlowServiceExecutorThreadPool.CompletedTaskCount))"
-                }
-            ]
+            "attr":["CompletedTaskCount", "ActiveCount"]
+        },
+        {
+            "obj":"fr.xebia:type=ServiceStatistics,name=f.x.p.b.z.ZeSlowServiceImpl.find",
+            "resultAlias":"ServiceStatistics.ZeSlowServiceImpl.find",
+            "attr":["InvocationCount", "VerySlowInvocationCount", "SlowInvocationCount", "OtherExceptionCount", "CurrentActive"]
+        },
+        {
+            "obj":"fr.xebia:type=ServiceStatistics,name=f.x.p.b.z.ZeBuggyServiceImpl.find",
+            "resultAlias":"ServiceStatistics.ZeBuggyServiceImpl.find",
+            "attr":["InvocationCount", "VerySlowInvocationCount", "SlowInvocationCount", "OtherExceptionCount", "CurrentActive"]
+        },
+        {
+            "obj":"fr.xebia:type=ServiceStatistics,name=f.x.p.b.z.ZeVerySlowServiceImpl.find",
+            "resultAlias":"ServiceStatistics.ZeVerySlowServiceImpl.find",
+            "attr":["InvocationCount", "VerySlowInvocationCount", "SlowInvocationCount", "OtherExceptionCount", "CurrentActive"]
+        },
+        {
+            "obj":"Catalina:j2eeType=Servlet,name=jsp,WebModule=//localhost/,J2EEApplication=none,J2EEServer=none",
+            "resultAlias":"Servlet.Jsp",
+            "attr":[ "requestCount", "errorCount", "processingTime" ]
+        },
+        {
+            "obj":"Catalina:type=GlobalRequestProcessor,name=http-8080",
+            "resultAlias":"Tomcat.RequestProcessor",
+            "attr":["requestCount", "errorCount", "processingTime", "bytesSent", "bytesReceived"]
+
         },
         {
             "obj":"java.lang:type=Memory",
             "resultAlias":"Jvm.Memory",
             "attr":[ "HeapMemoryUsage", "NonHeapMemoryUsage" ]
-        },
-        {
-            "obj":"Catalina:j2eeType=Servlet,name=jsp,WebModule=//localhost/,J2EEApplication=none,J2EEServer=none",
-            "resultAlias":"Servlet.Jsp",
-            "attr":[ "requestCount", "errorCount", "processingTime" ],
-            "graph": [
-                {
-                    "name":"Servlet.Jsp.requestCount",
-                    "url": "${graphite.baseUrl}/render/?from=-24hours&target=sumSeries(servers.prod-ready-server-*.Servlet.Jsp.requestCount))"
-                },
-                {
-                    "name":"Servlet.Jsp.errorCount",
-                    "url": "${graphite.baseUrl}/render/?from=-24hours&target=sumSeries(servers.prod-ready-server-*.Servlet.Jsp.errorCount))"
-                }
-            ]
         }
+
     ]
 }
