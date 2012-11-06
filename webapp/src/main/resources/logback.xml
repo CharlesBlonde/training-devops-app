@@ -1,11 +1,11 @@
-<configuration scan="true" >
+<configuration scan="true">
 
-    <if condition='isNull("catalina.home")'>
+    <if condition='isDefined("catalina_base")'>
         <then>
-            <property name="BASE_FOLDER" value="./target"/>
+            <property name="BASE_FOLDER" value="${CATALINA_BASE}"/>
         </then>
         <else>
-            <property name="BASE_FOLDER" value="${catalina.home}"/>
+            <property name="BASE_FOLDER" value="./target"/>
         </else>
     </if>
     <property name="LOGS_FOLDER" value="${BASE_FOLDER}/logs"/>
@@ -68,14 +68,23 @@
     </logger>
 
 
-    <appender name="out" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{yyyy/MM/dd HH:mm:ss,SSS} [%thread] %-5level %logger{36} - %m%n</pattern>
-        </encoder>
-    </appender>
+    <if condition='!isDefined("catalina_base")'>
+        <then>
+            <!-- dev mode, log in console -->
+            <appender name="out" class="ch.qos.logback.core.ConsoleAppender">
+                <encoder>
+                    <pattern>%d{yyyy/MM/dd HH:mm:ss,SSS} [%thread] %-5level %logger{36} - %m %throwable{5}%n</pattern>
+                </encoder>
+            </appender>
+            <root level="WARN">
+                <appender-ref ref="out"/>
+            </root>
+        </then>
+    </if>
+
+
     <root level="WARN">
         <appender-ref ref="log-file"/>
         <appender-ref ref="troubleshooting-file"/>
-        <appender-ref ref="out" />
     </root>
 </configuration>
