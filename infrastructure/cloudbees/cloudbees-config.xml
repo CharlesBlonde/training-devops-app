@@ -7,4 +7,11 @@ bees config:update -a prod-ready-app -ac atelier-xebia ./cloudbees-config.xml
     <param name="jdbc_username" value="prodreadyapp"/>
     <param name="jdbc_password" value="ETwnLKPP46s"/>
     <param name="jdbc_url" value="jdbc:cloudbees://prod-ready-app"/>
+
+
+    <param name="mail_host" value="smtp.sendgrid.net"/>
+    <param name="mail_port" value="587"/>
+    <param name="mail_secure" value="true"/>
+    <param name="mail_username" value="my_username"/>
+    <param name="mail_password" value="my_password"/>
 </config>
