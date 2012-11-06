@@ -43,7 +43,8 @@
     <context:mbean-export server="mbeanServer"/>
 
     <!-- SECURITY -->
-    <sec:http auto-config='true' realm="Production Ready Application">
+    <sec:http auto-config='true' realm="Production Ready Application" create-session="never">
+        <!-- don't create session as WS calls are stateless even if they are authenticated -->
         <sec:intercept-url pattern="/services/**" access="ROLE_USER"/>
         <sec:http-basic/>
         <sec:anonymous/>
