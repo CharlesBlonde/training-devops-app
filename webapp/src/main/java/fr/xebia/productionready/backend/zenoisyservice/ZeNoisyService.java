@@ -29,7 +29,7 @@ import fr.xebia.management.statistics.Profiled;
 /**
  * A service that emits a lot of log messages (debugging, audit and perf
  * messages).
- * 
+ *
  * @author <a href="mailto:cyrille@cyrilleleclerc.com">Cyrille Le Clerc</a>
  */
 @ManagedResource(objectName = "fr.xebia:service=ZeNoisyService,type=ZeNoisyServiceImpl")
@@ -60,7 +60,7 @@ public class ZeNoisyService {
             // LOG INVOCATION DURATION
             long durationInNanos = System.nanoTime() - nanoTimeBefore;
             if (durationInNanos > durationWarningThresholdInNanos) {
-                performanceLogger.warn("ZeNoisyService.doNoisyJob({}) took {} ms ! add query details to help diagnostic", id,
+                performanceLogger.warn("ZeNoisyService.doNoisyJob({}) took {} ms - SLOW! add your query details to help diagnostic if you want", id,
                         TimeUnit.MILLISECONDS.convert(durationInNanos, TimeUnit.NANOSECONDS));
             } else {
                 performanceLogger.info("ZeNoisyService.doNoisyJob({}) took {} ms", id, TimeUnit.MILLISECONDS.convert(durationInNanos,
