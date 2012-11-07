@@ -4,7 +4,9 @@ CATALINA_PID=$CATALINA_BASE/tomcat.pid
 
 export CATALINA_BASE CATALINA_HOME CATALINA_PID;
 
-CATALINA_OPTS="-Xmx324m -XX:MaxPermSize=128m"
+CATALINA_OPTS="-Xmx256m -XX:MaxPermSize=128m"
+
+CATALINA_NEW_RELIC_OPTS="-Dnewrelic.environment=production -javaagent:$CATALINA_BASE/lib/newrelic-2.10.0.jar"
 
 CATALINA_JMX_OPTS="\
     -Dcom.sun.management.jmxremote \
@@ -13,7 +15,7 @@ CATALINA_JMX_OPTS="\
     -Dcom.sun.management.jmxremote.authenticate=false"
 
 ## -Dcatalina_base is used by logback
-CATALINA_OPTS="$CATALINA_OPTS $CATALINA_JMX_OPTS -Dcatalina_base=$CATALINA_BASE"
+CATALINA_OPTS="$CATALINA_OPTS $CATALINA_JMX_OPTS $CATALINA_NEW_RELIC_OPTS -Dcatalina_base=$CATALINA_BASE"
 
 export CATALINA_OPTS;
 
