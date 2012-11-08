@@ -166,7 +166,7 @@
         <property name="zeBuggyService" ref="zeBuggyServiceImpl"/>
     </bean>
 
-    <bean id="zeNoisyService" class="fr.xebia.productionready.backend.zenoisyservice.ZeNoisyService"></bean>
+    <bean id="zeNoisyService" class="fr.xebia.productionready.backend.zenoisyservice.ZeNoisyService"/>
 
     <bean id="zeSlowServiceImpl" class="fr.xebia.productionready.backend.zeslowservice.ZeSlowServiceImpl"/>
     <bean id="zeSlowService" class="fr.xebia.productionready.backend.zeslowservice.ZeSlowServiceBoundedImpl">
@@ -174,9 +174,9 @@
     </bean>
 
     <bean id="anotherVerySlowService"
-          class="fr.xebia.productionready.backend.anotherveryslowservice.AnotherVerySlowServiceImpl"></bean>
+          class="fr.xebia.productionready.backend.anotherveryslowservice.AnotherVerySlowServiceImpl"/>
     <bean id="zeVerySlowService"
-          class="fr.xebia.productionready.backend.zeveryslowservice.ZeVerySlowServiceImpl"></bean>
+          class="fr.xebia.productionready.backend.zeveryslowservice.ZeVerySlowServiceImpl"/>
 
     <bean id="zeVerySlowAggregatingServiceImpl"
           class="fr.xebia.productionready.service.ZeVerySlowAggregatingServiceImpl">
@@ -195,6 +195,8 @@
     <bean id="zeJmsService" class="fr.xebia.productionready.service.ZeJmsService">
         <property name="connectionFactory" ref="connectionFactory"/>
     </bean>
+
+    <bean id="emailService"  class="fr.xebia.productionready.service.EmailService"/>
 
     <bean id="customerCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
         <property name="cacheManager" ref="cacheManager"/>
