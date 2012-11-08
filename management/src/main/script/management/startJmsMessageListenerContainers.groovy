@@ -26,7 +26,7 @@ jmxClient.connect()
 
 def server = jmxClient.getMBeanServerConnection()
 
-// javax.jms:destination=my-destination,name="fr.xebia.springframework.jms.ManagedDefaultMessageListenerContainer#0",type=MessageListenerContainer,host=localhost,path=/production-ready-application
+// javax.jms:destination=my-destination,name="fr.xebia.springframework.jms.ManagedDefaultMessageListenerContainer#0",type=MessageListenerContainer
 server.queryNames(new ObjectName('javax.jms:type=MessageListenerContainer,*'), null).each { name ->
     def jmsMessageListenerContainer = new GroovyMBean(server, name)
     jmsMessageListenerContainer.start()
