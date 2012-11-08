@@ -3,12 +3,12 @@
 import javax.management.ObjectName
 import javax.management.Query
 
-import groovy.jmx.JmxBuilder
+import groovy.jmx.builder.JmxBuilder
 
 def cli = new CliBuilder( usage: 'groovy startJmsMessageListenerContainers [-h] -s servername -p port')
 cli.h(longOpt:'help', 'usage information')
 cli.s(argName:'servername', longOpt:'server', args:1, required:true, type:GString, 'Hostname of the server to connect to (e.g. localhost)')
-cli.p(argName:'port', longOpt:'port', args:1, required:true, 'Port of the server to connect to (e.g. 6969)')
+cli.p(argName:'port', longOpt:'port', args:1, required:true, 'Port of the server to connect to (e.g. 1099)')
 
 def opt = cli.parse(args)
 

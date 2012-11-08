@@ -3,7 +3,7 @@
 import javax.management.ObjectName;
 import javax.management.Query;
 
-import groovy.jmx.JmxBuilder;
+import groovy.jmx.builder.JmxBuilder
 
 def cli = new CliBuilder( usage: 'groovy startJmsMessageListenerContainers [-h] -s servername -p port')
 cli.h(longOpt:'help', 'usage information')
