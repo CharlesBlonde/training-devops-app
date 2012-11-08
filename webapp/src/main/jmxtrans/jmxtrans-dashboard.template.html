@@ -1,0 +1,47 @@
+<html>
+
+<body>
+
+<h1>Application Indicators</h1>
+
+<h2>ZeVerySlowService</h2>
+
+<p>
+    <img src="${graphite.baseUrl}/render/?from=-2hours&target=alias(derivative(sumSeries(servers.prod-ready-server-*.ServiceStatistics.ZeVerySlowServiceImpl.find.InvocationCount)),'find.InvocationCount')&title=ZeVerySlowService"/>
+    <img src="${graphite.baseUrl}/render/?from=-2hours&target=alias(color(derivative(sumSeries(servers.prod-ready-server-*.ServiceStatistics.ZeVerySlowServiceImpl.find.SlowInvocationCount)),'orange'),'find.SlowInvocationCount')&title=ZeVerySlowService"/>
+    <img src="${graphite.baseUrl}/render/?from=-2hours&target=alias(color(derivative(sumSeries(servers.prod-ready-server-*.ServiceStatistics.ZeVerySlowServiceImpl.find.VerySlowInvocationCount)), 'red'),'find.VerySlowInvocationCount')&title=ZeVerySlowService"/>
+</p>
+
+<ul>
+    <li>
+        <a href="${graphite.baseUrl}/render/?from=-2hours&target=alias(derivative(sumSeries(servers.prod-ready-server-*.ServiceStatistics.ZeVerySlowServiceImpl.find.InvocationCount)),'find.InvocationCount')&title=ZeVerySlowService&format=csv">find.InvocationCount
+            CSV</a>
+    </li>
+    <li>
+        <a href="${graphite.baseUrl}/render/?from=-2min&target=alias(derivative(sum(servers.prod-ready-server-*.ServiceStatistics.ZeVerySlowServiceImpl.find.VerySlowInvocationCount)),'find.VerySlowInvocationCountPerMinute')&rawData">find.VerySlowInvocationCountPerMinute
+            Nagios</a>
+    </li>
+</ul>
+
+<h2>AnotherVerySlowService</h2>
+
+<p>
+    <img src="${graphite.baseUrl}/render/?from=-2hours&target=alias(derivative(sumSeries(servers.prod-ready-server-*.ThreadPoolExecutor.anotherVerySlowServiceExecutorThreadPool.CompletedTaskCount)),'ThreadPool.CompletedTaskCount')&title=AnotherVerySlowService"/>
+</p>
+
+
+<h2>JSP</h2>
+
+<img src="${graphite.baseUrl}/render/?from=-2hours&target=alias(sumSeries(servers.prod-ready-server-*.Servlet.Jsp.requestCount),'Jsp.requestCount')&title=Jsp"/>
+
+<img src="${graphite.baseUrl}/render/?from=-2hours&target=alias(sumSeries(servers.prod-ready-server-*.Servlet.Jsp.errorCount),'Jsp.errorCount')&title=Jsp"/>
+
+<h1>Tomcat Indicators</h1>
+
+
+<img src="${graphite.baseUrl}/render/?from=-2hours&target=alias(sumSeries(servers.prod-ready-server-*.Tomcat.RequestProcessor.requestCount),'requestCount')&title=Tomcat"/>
+
+<img src="${graphite.baseUrl}/render/?from=-2hours&target=alias(color(sumSeries(servers.prod-ready-server-*.Tomcat.RequestProcessor.errorCount),'red'),'errorCount')&title=Tomcat"/>
+
+</body>
+</html>

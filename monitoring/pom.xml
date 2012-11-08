@@ -106,7 +106,7 @@
                                     ${project.basedir}/../infrastructure/integ/graphite-outputwriters.json
                                 </outputWritersFile>
                                 <dashboardTemplateFile>
-                                    ${project.basedir}/../webapp/src/main/jmxtrans/jmxtrans-dashboard.template
+                                    ${project.basedir}/../webapp/src/main/jmxtrans/jmxtrans-dashboard.template.html
                                 </dashboardTemplateFile>
                                 <generatedDashboardFile>
                                     production-ready-application-dashboard-${project.version}-integ.html
@@ -127,7 +127,7 @@
                                     ${project.basedir}/../infrastructure/prod/graphite-outputwriters.json
                                 </outputWritersFile>
                                 <dashboardTemplateFile>
-                                    ${project.basedir}/../webapp/src/main/jmxtrans/jmxtrans-dashboard.template
+                                    ${project.basedir}/../webapp/src/main/jmxtrans/jmxtrans-dashboard.template.html
                                 </dashboardTemplateFile>
                                 <generatedDashboardFile>
                                     production-ready-application-dashboard-${project.version}-prod.html
@@ -148,7 +148,7 @@
                                     ${project.basedir}/../infrastructure/localhost/graphite-outputwriters.json
                                 </outputWritersFile>
                                 <dashboardTemplateFile>
-                                    ${project.basedir}/../webapp/src/main/jmxtrans/jmxtrans-dashboard.template
+                                    ${project.basedir}/../webapp/src/main/jmxtrans/jmxtrans-dashboard.template.html
                                 </dashboardTemplateFile>
                                 <generatedDashboardFile>
                                     production-ready-application-dashboard-${project.version}-localhost.html
