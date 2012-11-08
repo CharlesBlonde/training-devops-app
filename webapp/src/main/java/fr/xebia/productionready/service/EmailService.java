@@ -19,7 +19,10 @@ import com.google.common.base.Strings;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jmx.export.annotation.ManagedAttribute;
+import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.jmx.export.annotation.ManagedResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.mail.*;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
@@ -47,6 +51,7 @@ public class EmailService {
 
     protected InternetAddress fromAddress;
 
+    @Autowired
     public EmailService(@Qualifier("smtpProperties") Properties smtpProperties) {
 
         if (Strings.isNullOrEmpty(smtpProperties.getProperty("mail.username"))) {
@@ -94,4 +99,20 @@ public class EmailService {
         model.addAttribute("subject", subject);
 
     }
+
+    @ManagedOperation
+    public void resetTransport() {
+
+    }
+
+    @ManagedAttribute
+    public String getFromAddress() {
+        return fromAddress.toString();
+    }
+
+    @ManagedAttribute
+    public void setFromAddress(String fromAddress) throws AddressException {
+        this.fromAddress = new InternetAddress(fromAddress);
+    }
+
 }
