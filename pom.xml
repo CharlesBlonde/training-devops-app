@@ -25,8 +25,8 @@
         <module>monitoring</module>
         <module>management</module>
         <module>infrastructure/integ/tomcat-integ</module>
-        <module>infrastructure/prod/tomcat-prod</module>
         <module>infrastructure/localhost/tomcat-localhost</module>
+        <module>infrastructure/prod/tomcat-prod</module>
     </modules>
     <dependencyManagement>
         <dependencies>
