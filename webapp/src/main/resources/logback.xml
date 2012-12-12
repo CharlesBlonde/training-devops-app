@@ -17,15 +17,15 @@
             <level>WARN</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOGS_TO_COLLECT_FOLDER}/my-application.%d{yyyyMMdd}.log</fileNamePattern>
+            <fileNamePattern>${LOGS_TO_COLLECT_FOLDER}/ecomm.%d{yyyyMMdd}.log</fileNamePattern>
         </rollingPolicy>
         <encoder>
-            <pattern>%d{yyyy/MM/dd HH:mm:ss,SSS} [%thread] %-5level %logger{36} - %m %throwable{0}%n</pattern>
+            <pattern>%d{yyyy/MM/dd HH:mm:ss,SSS} [%thread] %-5level %logger{36} - %m %throwable{5}%n</pattern>
         </encoder>
     </appender>
 
     <appender name="audit-file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOGS_FOLDER}/my-application-audit.log</file>
+        <file>${LOGS_FOLDER}/ecomm-audit.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${LOGS_TO_COLLECT_FOLDER}/my-application-audit.%d{yyyyMMdd}.log.gzip</fileNamePattern>
         </rollingPolicy>
