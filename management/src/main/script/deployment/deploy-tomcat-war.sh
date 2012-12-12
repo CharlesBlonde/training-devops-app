@@ -38,6 +38,7 @@ echo "Shutdown tomcat server '$CATALINA_BASE/bin/catalina.sh stop' ..."
 # shutdown tomcat
 $CATALINA_BASE/bin/catalina.sh stop
 sleep 5
+echo "should replace 'catalina.sh stop' + sleep 5 by linux 'service tomcat-xxx stop' and an underlying 'kill -9'"
 
 echo "Uninstall webapp from tomcat server '$CATALINA_BASE' ..."
 

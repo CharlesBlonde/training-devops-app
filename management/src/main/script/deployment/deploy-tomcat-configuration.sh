@@ -66,6 +66,7 @@ tar -cvzf $BACKUP_ARCHIVE \
 echo "Shutdown tomcat server '$CATALINA_BASE/bin/catalina.sh stop' ..."
 $CATALINA_BASE/bin/catalina.sh stop
 sleep 5
+echo "should replace 'catalina.sh stop' + sleep 5 by linux 'service tomcat-xxx stop' and an underlying 'kill -9'"
 
 echo "Deploy new configuration ..."
 rsync -avz --del \
