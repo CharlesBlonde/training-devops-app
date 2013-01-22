@@ -2,15 +2,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>fr.xebia.training.devops.prodreadyapp</groupId>
+        <groupId>fr.xebia.training.devops.app</groupId>
         <version>0.0.3-SNAPSHOT</version>
-        <artifactId>production-ready-application</artifactId>
+        <artifactId>devops-app</artifactId>
         <relativePath>../../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>production-ready-application-tomcat-prod</artifactId>
-    <name>production-ready-application-tomcat-prod</name>
-    <description>Tomcat Production config for production-ready-application</description>
+    <artifactId>devops-app-tomcat-prod</artifactId>
+    <name>devops-app-tomcat-prod</name>
+    <description>Tomcat Production config for devops-app</description>
     <packaging>pom</packaging>
     <dependencies>
         <dependency>

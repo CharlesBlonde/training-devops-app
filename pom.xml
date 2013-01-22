@@ -2,23 +2,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>fr.xebia.training.devops.prodreadyapp</groupId>
-    <artifactId>production-ready-application</artifactId>
+    <groupId>fr.xebia.training.devops.app</groupId>
+    <artifactId>devops-app</artifactId>
     <packaging>pom</packaging>
     <version>0.0.3-SNAPSHOT</version>
-    <name>production-ready-application</name>
-    <developers>
-        <developer>
-            <id>cleclerc</id>
-            <name>Cyrille Le Clerc</name>
-            <email>cleclerc@xebia.fr</email>
-            <organization>Xebia France</organization>
-        </developer>
-    </developers>
+    <name>devops-app</name>
     <scm>
-        <connection>scm:git:git@github.com:xebia-france/training-production-ready-application.git</connection>
-        <developerConnection>scm:git:git://github.com/xebia-france/training-production-ready-application.git
-        </developerConnection>
+        <connection>scm:git:git@github.com:xebia-france/training-devops-app.git</connection>
+        <developerConnection>scm:git:git://github.com/xebia-france/training-devops-app.git</developerConnection>
     </scm>
     <modules>
         <module>webapp</module>
@@ -363,4 +354,12 @@
             <url>dav:https://repository-atelier-xebia.forge.cloudbees.com/snapshot/</url>
         </snapshotRepository>
     </distributionManagement>
+    <developers>
+        <developer>
+            <id>cleclerc</id>
+            <name>Cyrille Le Clerc</name>
+            <email>cleclerc@xebia.fr</email>
+            <organization>Xebia France</organization>
+        </developer>
+    </developers>
 </project>

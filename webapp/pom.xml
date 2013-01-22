@@ -3,13 +3,13 @@
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>fr.xebia.training.devops.prodreadyapp</groupId>
+        <groupId>fr.xebia.training.devops.app</groupId>
         <version>0.0.3-SNAPSHOT</version>
-        <artifactId>production-ready-application</artifactId>
+        <artifactId>devops-app</artifactId>
     </parent>
-    <artifactId>production-ready-application-webapp</artifactId>
+    <artifactId>devops-app-webapp</artifactId>
     <packaging>war</packaging>
-    <name>production-ready-application-webapp</name>
+    <name>devops-app-webapp</name>
     <dependencies>
         <!-- Spring framework -->
         <dependency>
@@ -244,6 +244,8 @@
                                     <extraargs>
                                         <extraarg>-b</extraarg>
                                         <extraarg>${basedir}/src/main/resources/META-INF/wsdl/binding.xjb</extraarg>
+                                        <extraarg>-fe</extraarg>
+                                        <extraarg>jaxws21</extraarg>
                                     </extraargs>
                                 </wsdlOption>
                             </wsdlOptions>
