@@ -342,11 +342,11 @@
     <distributionManagement>
         <repository>
             <id>xebia-france-release</id>
-            <url>dav:https://repository-atelier-xebia.forge.cloudbees.com/release/</url>
+            <url>dav:http://repository-xebia-france.forge.cloudbees.com/release/</url>
         </repository>
         <snapshotRepository>
             <id>xebia-france-snapshot</id>
-            <url>dav:https://repository-atelier-xebia.forge.cloudbees.com/snapshot/</url>
+            <url>dav:http://repository-xebia-france.forge.cloudbees.com/snapshot/</url>
         </snapshotRepository>
     </distributionManagement>
     <developers>
