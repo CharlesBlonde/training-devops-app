@@ -2,7 +2,7 @@
     "servers":[
         {
             "port":"1099",
-            "host":"tomcat1.ecommerce.local",
+            "host":"training-devops-tomcat.aws.xebiatechevent.info",
             "alias":"prod-ready-server-1",
             "numQueryThreads":2
         },
