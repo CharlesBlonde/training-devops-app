@@ -59,15 +59,6 @@
         </encoder>
     </appender>
 
-    <logger name="fr.xebia.audit" additivity="false" level="TRACE">
-        <appender-ref ref="audit-file"/>
-    </logger>
-
-    <logger name="fr.xebia.performances" additivity="false" level="TRACE">
-        <appender-ref ref="performances-file"/>
-    </logger>
-
-
     <if condition='!isDefined("catalina_base")'>
         <then>
             <!-- dev mode, log in console -->
@@ -81,6 +72,23 @@
             </root>
         </then>
     </if>
+
+    <appender name="syslog" class="ch.qos.logback.classic.net.SyslogAppender">
+        <syslogHost>${syslog_host:-training-devops-tools.aws.xebiatechevent.info}</syslogHost>
+        <port>${syslog_port:-9000}</port>
+        <facility>LOCAL7</facility>
+        <suffixPattern>%d{yyyy/MM/dd HH:mm:ss,SSS} [%thread] %-5level %logger{30} - %msg %throwable{5}%n</suffixPattern>
+        <throwableExcluded>true</throwableExcluded>
+    </appender>
+
+    <logger name="fr.xebia.audit" additivity="false" level="TRACE">
+        <appender-ref ref="audit-file"/>
+        <appender-ref ref="syslog"/>
+    </logger>
+
+    <logger name="fr.xebia.performances" additivity="false" level="TRACE">
+        <appender-ref ref="performances-file"/>
+    </logger>
 
 
     <root level="WARN">

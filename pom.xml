@@ -278,11 +278,13 @@
                 <version>13.0.1</version>
             </dependency>
 
+            <!--
             <dependency>
                 <groupId>com.newrelic</groupId>
                 <artifactId>newrelic</artifactId>
                 <version>2.10.0</version>
             </dependency>
+            -->
 
             <dependency>
                 <groupId>org.codehaus.groovy</groupId>
