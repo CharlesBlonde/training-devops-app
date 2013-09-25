@@ -70,7 +70,7 @@ cp $TMP_DIR/$ARTIFACT_ID-$VERSION.war $CATALINA_BASE/webapps/ROOT.war
 echo "Start Tomcat server '$CATALINA_BASE/bin/catalina.sh start' ..."
 $CATALINA_BASE/bin/catalina.sh start
 
-for ((  i = 5 ;  i > 0;  i--  ))
+for ((  i = 12 ;  i > 0;  i--  ))
 do
 	echo "Wait up to $(expr $i \* 5) seconds for application startup ..."
 	sleep 5
