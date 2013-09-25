@@ -66,7 +66,7 @@ tar -cvzf $BACKUP_ARCHIVE \
 
 echo "Shutdown tomcat server '$CATALINA_BASE/bin/catalina.sh stop' ..."
 $CATALINA_BASE/bin/catalina.sh stop
-sleep 5
+sleep 15
 echo "should replace 'catalina.sh stop' + sleep 5 by linux 'service tomcat-xxx stop' and an underlying 'kill -9'"
 
 echo "Deploy new configuration ..."
@@ -86,6 +86,11 @@ fi
 if [ ! -d "$CATALINA_BASE/work/" ];
 then
    mkdir "$CATALINA_BASE/work/"
+fi
+
+if [ ! -d "$CATALINA_BASE/logs/" ];
+then
+   mkdir "$CATALINA_BASE/logs/"
 fi
 
 # start tomcat

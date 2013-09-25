@@ -38,7 +38,7 @@ echo "Shutdown tomcat server '$CATALINA_BASE/bin/catalina.sh stop' ..."
 
 # shutdown tomcat
 $CATALINA_BASE/bin/catalina.sh stop
-sleep 5
+sleep 15
 echo "should replace 'catalina.sh stop' + sleep 5 by linux 'service tomcat-xxx stop' and an underlying 'kill -9'"
 
 echo "Uninstall webapp from tomcat server '$CATALINA_BASE' ..."
@@ -62,6 +62,11 @@ echo "Install webapp '$TMP_DIR/$ARTIFACT_ID-$VERSION.war' on tomcat server '$CAT
 if [ ! -d $CATALINA_BASE/webapps/ ];
 then
    mkdir "$CATALINA_BASE/webapps/"
+fi
+
+if [ ! -d $CATALINA_BASE/logs/ ];
+then
+   mkdir "$CATALINA_BASE/logs/"
 fi
 
 cp $TMP_DIR/$ARTIFACT_ID-$VERSION.war $CATALINA_BASE/webapps/ROOT.war
