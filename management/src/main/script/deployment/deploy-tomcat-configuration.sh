@@ -8,13 +8,13 @@ then
    exit 1
 fi
 
-CATALINA_BASE=/opt/tomcat-prod-ready-app
-GROUP_ID=fr.xebia.training.devops.prodreadyapp
+CATALINA_BASE=/home/ec2-user/tomcat
+GROUP_ID=fr.xebia.training.devops.app
 HEALT_CHECK_URL="http://localhost:8080/healthcheck.jsp"
 
 # one of ["localhost", "integ", "prod"]
 ENV_IDENTIFIER=$1
-ARTIFACT_ID="production-ready-application-tomcat-$ENV_IDENTIFIER"
+ARTIFACT_ID="devops-app-tomcat-$ENV_IDENTIFIER"
 
 VERSION=${2:-"LATEST"}
 
@@ -29,7 +29,8 @@ mkdir $TMP_DIR
 
 # download new war version
 echo "Download '$GROUP_ID:$ARTIFACT_ID:$VERSION':tgz ..."
-mvn org.apache.maven.plugins:maven-dependency-plugin:2.5:get -DremoteRepositories=atelier-xebia-snapshot::default::https://repository-atelier-xebia.forge.cloudbees.com/snapshot/,atelier-xebia-release::default::https://repository-atelier-xebia.forge.cloudbees.com/release/ -Dartifact=$GROUP_ID:$ARTIFACT_ID:$VERSION:tar.gz:distribution -Ddest=$TMP_DIR/$ARTIFACT_ID-$VERSION.tgz
+#mvn org.apache.maven.plugins:maven-dependency-plugin:2.5:get -DremoteRepositories=atelier-xebia-snapshot::default::https://repository-atelier-xebia.forge.cloudbees.com/snapshot/,atelier-xebia-release::default::https://repository-atelier-xebia.forge.cloudbees.com/release/ -Dartifact=$GROUP_ID:$ARTIFACT_ID:$VERSION:tar.gz:distribution -Ddest=$TMP_DIR/$ARTIFACT_ID-$VERSION.tgz
+mvn org.apache.maven.plugins:maven-dependency-plugin:2.5:get -DremoteRepositories=xebia-france-snapshot::default::https://repository-xebia-france.forge.cloudbees.com/snapshot/,xebia-france-release::default::https://repository-xebia-france.forge.cloudbees.com/release/ -Dartifact=$GROUP_ID:$ARTIFACT_ID:$VERSION:tar.gz:distribution -Ddest=$TMP_DIR/$ARTIFACT_ID-$VERSION.tgz
 
 if [ "$?" !=  0 ];
 then
@@ -91,7 +92,7 @@ fi
 echo "Start Tomcat server '$CATALINA_BASE/bin/catalina.sh start' ..."
 $CATALINA_BASE/bin/catalina.sh start
 
-for ((  i = 5 ;  i > 0;  i--  ))
+for ((  i = 12 ;  i > 0;  i--  ))
 do
 	echo "Wait up to $(expr $i \* 5) seconds for application startup ..."
 	sleep 5
