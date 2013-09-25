@@ -8,13 +8,13 @@
         },
         {
             "port":"1099",
-            "host":"tomcat2.ecommerce.local",
+            "host":"training-devops-tomcat-2.aws.xebiatechevent.info",
             "alias":"prod-ready-server-2",
             "numQueryThreads":2
         },
         {
             "port":"1099",
-            "host":"tomcat3.ecommerce.local",
+            "host":"training-devops-tomcat-3.aws.xebiatechevent.info",
             "alias":"prod-ready-server-3",
             "numQueryThreads":2
         }
