@@ -4,7 +4,7 @@ if [[ $# == 0 || $# > 2 ]];
 then
    echo "ERROR: illegal number of arguments ($#), expected at least 1 parameter "
    echo "1st param : app identifier ['localhost', 'integ', 'prod']"
-   echo "2nd param : artifact version (version like '1.0.0' or '1.1.0-SNAPSHOT' or keyword 'LATEST'). Optional, default value is 'LATEST'"
+   echo "2nd param : artifact version (version like '1.0.0' or '1.1.0-SNAPSHOT' or keyword 'LATEST'). Optional, default value is '0.0.3-SNAPSHOT'"
    exit 1
 fi
 
@@ -16,7 +16,7 @@ HEALT_CHECK_URL="http://localhost:8080/healthcheck.jsp"
 ENV_IDENTIFIER=$1
 ARTIFACT_ID="devops-app-tomcat-$ENV_IDENTIFIER"
 
-VERSION=${2:-"LATEST"}
+VERSION=${2:-"0.0.3-SNAPSHOT"}
 
 TMP_DIR=/tmp/deploy-$ARTIFACT_ID
 
@@ -30,7 +30,7 @@ mkdir $TMP_DIR
 # download new war version
 echo "Download '$GROUP_ID:$ARTIFACT_ID:$VERSION':tgz ..."
 #mvn org.apache.maven.plugins:maven-dependency-plugin:2.5:get -DremoteRepositories=atelier-xebia-snapshot::default::https://repository-atelier-xebia.forge.cloudbees.com/snapshot/,atelier-xebia-release::default::https://repository-atelier-xebia.forge.cloudbees.com/release/ -Dartifact=$GROUP_ID:$ARTIFACT_ID:$VERSION:tar.gz:distribution -Ddest=$TMP_DIR/$ARTIFACT_ID-$VERSION.tgz
-mvn org.apache.maven.plugins:maven-dependency-plugin:2.5:get -DremoteRepositories=xebia-france-snapshot::default::https://repository-xebia-france.forge.cloudbees.com/snapshot/,xebia-france-release::default::https://repository-xebia-france.forge.cloudbees.com/release/ -Dartifact=$GROUP_ID:$ARTIFACT_ID:$VERSION:tar.gz:distribution -Ddest=$TMP_DIR/$ARTIFACT_ID-$VERSION.tgz
+mvn org.apache.maven.plugins:maven-dependency-plugin:2.5:get -DremoteRepositories=xebia-france-snapshot::default::https://repository-cblonde.forge.cloudbees.com/snapshot/,xebia-france-release::default::https://repository-cblonde.forge.cloudbees.com/release/ -Dartifact=$GROUP_ID:$ARTIFACT_ID:$VERSION:tar.gz:distribution -Ddest=$TMP_DIR/$ARTIFACT_ID-$VERSION.tgz
 
 if [ "$?" !=  0 ];
 then

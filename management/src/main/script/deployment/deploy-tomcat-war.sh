@@ -27,7 +27,7 @@ mkdir $TMP_DIR
 # download new war version
 echo "Download '$GROUP_ID:$ARTIFACT_ID:$VERSION':war ..."
 #mvn org.apache.maven.plugins:maven-dependency-plugin:2.5:get -DremoteRepositories=atelier-xebia-snapshot::default::https://repository-atelier-xebia.forge.cloudbees.com/snapshot/,atelier-xebia-release::default::https://repository-atelier-xebia.forge.cloudbees.com/release/ -Dartifact=$GROUP_ID:$ARTIFACT_ID:$VERSION:war -Ddest=$TMP_DIR/$ARTIFACT_ID-$VERSION.war
-mvn org.apache.maven.plugins:maven-dependency-plugin:2.5:get -DremoteRepositories=xebia-france-snapshot::default::https://repository-xebia-france.forge.cloudbees.com/snapshot/,atelier-xebia-release::default::https://repository-xebia-france.forge.cloudbees.com/release/ -Dartifact=$GROUP_ID:$ARTIFACT_ID:$VERSION:war -Ddest=$TMP_DIR/$ARTIFACT_ID-$VERSION.war
+mvn org.apache.maven.plugins:maven-dependency-plugin:2.5:get -DremoteRepositories=xebia-france-snapshot::default::https://repository-cblonde.forge.cloudbees.com/snapshot/,atelier-xebia-release::default::https://repository-cblonde.forge.cloudbees.com/release/ -Dartifact=$GROUP_ID:$ARTIFACT_ID:$VERSION:war -Ddest=$TMP_DIR/$ARTIFACT_ID-$VERSION.war
 
 if [ "$?" !=  0 ];
 then
