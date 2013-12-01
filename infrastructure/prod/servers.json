@@ -5,19 +5,6 @@
             "host":"training-devops-webapp.aws.xebiatechevent.info",
             "alias":"prod-ready-server-1",
             "numQueryThreads":2
-        }/*,
-        {
-            "port":"1099",
-            "host":"training-devops-tomcat-2.aws.xebiatechevent.info",
-            "alias":"prod-ready-server-2",
-            "numQueryThreads":2
-        },
-        {
-            "port":"1099",
-            "host":"training-devops-tomcat-3.aws.xebiatechevent.info",
-            "alias":"prod-ready-server-3",
-            "numQueryThreads":2
         }
-        */
     ]
 }
