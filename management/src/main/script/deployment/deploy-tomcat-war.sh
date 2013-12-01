@@ -4,6 +4,7 @@ if [[ $# == 0 || $# > 2 ]];
 then
    echo "ERROR: illegal number of arguments ($#), expected 0 or 1 parameter "
    echo "1st param : artifact version (version like '1.0.0' or '1.1.0-SNAPSHOT' or keyword 'LATEST'). Optional, default value is 'LATEST'"
+
    exit 1
 fi
 
