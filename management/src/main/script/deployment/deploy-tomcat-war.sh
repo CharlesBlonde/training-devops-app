@@ -3,19 +3,22 @@
 if [[ $# == 0 || $# > 2 ]];
 then
    echo "ERROR: illegal number of arguments ($#), expected 0 or 1 parameter "
-   echo "1st param : artifact version (version like '1.0.0' or '1.1.0-SNAPSHOT' or keyword 'LATEST'). Optional, default value is 'LATEST'"
+   echo "1st param : artifact version (version like '1.0.0' or '1.1.0-SNAPSHOT' or keyword 'LATEST'). Optional, default value is '0.0.3-SNAPSHOT'"
 
    exit 1
 fi
 
 CATALINA_BASE=/home/ec2-user/tomcat
+MAVEN_HOME=/opt/maven/maven3
 GROUP_ID=fr.xebia.training.devops.app
 ARTIFACT_ID="devops-app-webapp"
 HEALT_CHECK_URL="http://localhost:8080/healthcheck.jsp"
 
-VERSION=${1:-"LATEST"}
+VERSION=${1:-"0.0.3-SNAPSHOT"}
 
 TMP_DIR=/tmp/deploy-$ARTIFACT_ID
+
+export PATH=$PATH:$MAVEN_HOME/bin
 
 if [ -d $TMP_DIR ];
 then
