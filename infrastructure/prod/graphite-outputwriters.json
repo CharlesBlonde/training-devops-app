@@ -4,9 +4,9 @@
             "@class" : "com.googlecode.jmxtrans.model.output.GraphiteWriter",
             "settings" : {
                 "port" : 2003,
-                "host" : "training-devops-ansible.aws.xebiatechevent.info",
+                "host" : "training-devops-graphite.aws.xebiatechevent.info",
                 "rootPrefix" : "servers",
-                "baseUrl" : "http://training-devops-ansible.aws.xebiatechevent.info"
+                "baseUrl" : "http://training-devops-graphite.aws.xebiatechevent.info"
             }
         }]
 }
