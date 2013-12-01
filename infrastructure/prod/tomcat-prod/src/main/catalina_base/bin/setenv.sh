@@ -12,7 +12,7 @@ CATALINA_APPDYNAMICS=""
 if [ -d ${APPDYNAMICS_DIR} ]
 then
     JVMNAME=`hostname |tr '[:lower:]' '[:upper:]'`
-    CATALINA_APPDYNAMICS="-javaagent:/opt/appdynamics/javaagent.jar -Dappdynamics.agent.runtime.dir=${CATALINA_BASE}/appdynamics -Dappdynamics.agent.applicationName=TRAINING-DEVOPS -Dappdynamics.agent.tierName=WEB -Dappdynamics.agent.nodeName=$JVMNAME -Dappdynamics.controller.hostName=xebia-lab.saas.appdynamics.com -Dappdynamics.controller.port=80 -Dappdynamics.agent.accountName=xebia-lab -Dappdynamics.agent.accountAccessKey=7fb9c37ae8e6 "
+    CATALINA_APPDYNAMICS="-javaagent:/opt/appdynamics/javaagent.jar -Dappdynamics.agent.runtime.dir=${CATALINA_BASE}/appdynamics -Dappdynamics.agent.applicationName=TRAINING-DEVOPS -Dappdynamics.agent.tierName=WEB -Dappdynamics.agent.nodeName=$JVMNAME -Dappdynamics.controller.hostName=xebia.saas.appdynamics.com -Dappdynamics.controller.port=80 -Dappdynamics.agent.accountName=xebia -Dappdynamics.agent.accountAccessKey=9333a7f71868 "
 fi
 
 CATALINA_JMX_OPTS="\
