@@ -15,7 +15,8 @@ then
     CATALINA_APPDYNAMICS="-javaagent:/opt/appdynamics/javaagent.jar -Dappdynamics.agent.runtime.dir=${CATALINA_BASE}/appdynamics -Dappdynamics.agent.applicationName=TRAINING-DEVOPS -Dappdynamics.agent.tierName=WEB -Dappdynamics.agent.nodeName=$JVMNAME -Dappdynamics.controller.hostName=xebia.saas.appdynamics.com -Dappdynamics.controller.port=80 -Dappdynamics.agent.accountName=xebia -Dappdynamics.agent.accountAccessKey=9333a7f71868 "
 fi
 
-CATALINA_JMX_OPTS="\
+EXTERNAL_IP=`curl -s http://169.254.169.254/latest/meta-data/local-ipv4`
+CATALINA_JMX_OPTS="-Djava.rmi.server.hostname=${EXTERNAL_IP} \
     -Dcom.sun.management.jmxremote \
     -Dcom.sun.management.jmxremote.port=1099 \
     -Dcom.sun.management.jmxremote.ssl=false \
